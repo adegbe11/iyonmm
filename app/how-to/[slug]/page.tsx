@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: g.title,
     description: `${g.intro} Step by step guide, free, nothing uploaded.`,
-    alternates: { canonical: `https://iyonm.com/how-to/${slug}` },
+    alternates: { canonical: `https://www.iyonm.com/how-to/${slug}` },
   };
 }
 
@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         description: g.intro,
         step: g.steps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.name, text: s.text })),
       },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: g.title, item: `https://iyonm.com/how-to/${slug}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: g.title, item: `https://www.iyonm.com/how-to/${slug}` }] },
     ],
   };
 

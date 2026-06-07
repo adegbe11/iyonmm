@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Word Counter, Free Online Word & Character Count",
   description: "Count words, characters, sentences, paragraphs, and reading time as you type. Free, instant, private. No signup.",
-  alternates: { canonical: "https://iyonm.com/word-counter" },
+  alternates: { canonical: "https://www.iyonm.com/word-counter" },
 };
 
 const faqs = [

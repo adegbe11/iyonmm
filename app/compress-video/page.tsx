@@ -4,7 +4,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Compress Video Online Free, No Watermark (No Upload)",
   description: "Compress MP4, MOV, and WebM videos in your browser. No watermark, no signup, nothing uploaded. Shrink video size for email, web, and social.",
-  alternates: { canonical: "https://iyonm.com/compress-video" },
+  alternates: { canonical: "https://www.iyonm.com/compress-video" },
 };
 
 const jsonLd = {
@@ -16,7 +16,7 @@ const jsonLd = {
       { "@type": "Question", name: "Is there a watermark?", acceptedAnswer: { "@type": "Answer", text: "No watermark, ever. The output is clean." } },
       { "@type": "Question", name: "Why is the first run slow?", acceptedAnswer: { "@type": "Answer", text: "The first run downloads the video engine (about 30MB) to your browser cache. After that it is much faster. Large videos still take time since all the work happens on your device." } },
     ] },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "Compress Video", item: "https://iyonm.com/compress-video" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "Compress Video", item: "https://www.iyonm.com/compress-video" }] },
   ],
 };
 

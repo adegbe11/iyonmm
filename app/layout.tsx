@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const SITE = "https://iyonm.com";
+const SITE = "https://www.iyonm.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),

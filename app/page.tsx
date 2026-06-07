@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const SITE = "https://iyonm.com";
+const SITE = "https://www.iyonm.com";
 
 // ItemList of the catalog helps Google and AI engines map every tool we offer.
 const jsonLd = {

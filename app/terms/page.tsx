@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Service - IYONM",
   description: "The terms for using IYONM free online tools. Provided as is, for lawful use, with no warranty.",
-  alternates: { canonical: "https://iyonm.com/terms" },
+  alternates: { canonical: "https://www.iyonm.com/terms" },
 };
 
 export default function Page() {

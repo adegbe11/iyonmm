@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Best iLovePDF Alternative, IYONM vs iLovePDF (Free, No Upload)",
   description: "Looking for an iLovePDF alternative? IYONM does the same PDF and image tools but processes everything in your browser, so your files are never uploaded. Free, no limits, no signup.",
-  alternates: { canonical: "https://iyonm.com/ilovepdf-alternative" },
+  alternates: { canonical: "https://www.iyonm.com/ilovepdf-alternative" },
 };
 
 const rows: { feature: string; iyonm: string; ilovepdf: string }[] = [
@@ -42,7 +42,7 @@ const jsonLd = {
         { "@type": "Question", name: "How is IYONM more private than iLovePDF?", acceptedAnswer: { "@type": "Answer", text: "iLovePDF uploads your files to its servers to process them. IYONM processes everything locally in your browser, so your documents never leave your device." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "iLovePDF Alternative", item: "https://iyonm.com/ilovepdf-alternative" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "iLovePDF Alternative", item: "https://www.iyonm.com/ilovepdf-alternative" }] },
   ],
 };
 

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ size: str
   return {
     title: `Compress Image to ${t.label} Online Free`,
     description: `Compress a JPG, PNG, or WebP image to exactly ${t.label} or under. Free, nothing uploaded, works right in your browser. Perfect for forms and uploads.`,
-    alternates: { canonical: `https://iyonm.com/compress-image-to/${size}` },
+    alternates: { canonical: `https://www.iyonm.com/compress-image-to/${size}` },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ size: string 
           { "@type": "Question", name: "What formats work?", acceptedAnswer: { "@type": "Answer", text: "JPG, PNG, and WebP images are all supported." } },
         ],
       },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: `Compress Image to ${t.label}`, item: `https://iyonm.com/compress-image-to/${size}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: `Compress Image to ${t.label}`, item: `https://www.iyonm.com/compress-image-to/${size}` }] },
     ],
   };
 

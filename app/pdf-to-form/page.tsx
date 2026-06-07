@@ -4,7 +4,7 @@ import PdfToFormClient from "./PdfToFormClient";
 export const metadata: Metadata = {
   title: "Fill PDF Forms Online Free, Turn a PDF into a Web Form",
   description: "Turn any PDF form into a clean, mobile-friendly web form, fill it out, and download the completed PDF. Free, runs in your browser, nothing uploaded.",
-  alternates: { canonical: "https://iyonm.com/pdf-to-form" },
+  alternates: { canonical: "https://www.iyonm.com/pdf-to-form" },
 };
 
 const jsonLd = {
@@ -19,7 +19,7 @@ const jsonLd = {
         { "@type": "Question", name: "My PDF has no fillable fields. Will it work?", acceptedAnswer: { "@type": "Answer", text: "This tool needs a PDF that already has form fields (an AcroForm). Flat scans without fields are not supported yet." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "PDF to Form", item: "https://iyonm.com/pdf-to-form" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "PDF to Form", item: "https://www.iyonm.com/pdf-to-form" }] },
   ],
 };
 

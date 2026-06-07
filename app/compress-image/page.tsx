@@ -4,7 +4,7 @@ import CompressImageClient from "./CompressImageClient";
 export const metadata: Metadata = {
   title: "Compress Image Online Free, No Upload",
   description: "Compress JPEG, PNG, and WebP images for free. Files never leave your device. No upload, no limits, no signup required.",
-  alternates: { canonical: "https://iyonm.com/compress-image" },
+  alternates: { canonical: "https://www.iyonm.com/compress-image" },
 };
 
 const jsonLd = {
@@ -29,8 +29,8 @@ const jsonLd = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" },
-        { "@type": "ListItem", position: 2, name: "Compress Image", item: "https://iyonm.com/compress-image" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" },
+        { "@type": "ListItem", position: 2, name: "Compress Image", item: "https://www.iyonm.com/compress-image" },
       ],
     },
   ],
