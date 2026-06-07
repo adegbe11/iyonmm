@@ -190,6 +190,9 @@ body {
   animation: rotateWordIn 2s ease forwards;
 }
 
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 .progress-bar {
   height: 4px;
   background: var(--apple-gray);

@@ -25,7 +25,7 @@ export default function HomeClient() {
   return (
     <>
       {/* Hero */}
-      <section className="text-center px-4 pt-20 pb-12" style={{ background: "var(--apple-gray)" }}>
+      <section className="text-center px-4 pt-12 sm:pt-20 pb-10 sm:pb-12" style={{ background: "var(--apple-gray)" }}>
         <div className="max-w-4xl mx-auto">
           <h1 className="font-bold tracking-tight mb-5" style={{ color: "var(--apple-black)", fontSize: "clamp(2.5rem, 6vw, 4.5rem)", lineHeight: 1.05 }} aria-label="Free online PDF, image and video tools. No sign up, no payment.">
             <span aria-hidden="true">
@@ -62,12 +62,12 @@ export default function HomeClient() {
       {/* Filter pills + grid */}
       <section className="px-4 py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-2 justify-center mb-10">
+          <div className="no-scrollbar flex gap-2 overflow-x-auto whitespace-nowrap pb-2 mb-7 -mx-4 px-4 sm:flex-wrap sm:justify-center sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:mb-10">
             {categories.map((c) => (
               <button
                 key={c.key}
                 onClick={() => setActive(c.key)}
-                className="px-5 py-2 rounded-full text-sm font-medium transition-all"
+                className="flex-shrink-0 px-4 sm:px-5 py-2 rounded-full text-sm font-medium transition-all"
                 style={
                   active === c.key
                     ? { background: "var(--apple-black)", color: "white" }
@@ -79,12 +79,12 @@ export default function HomeClient() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             {filtered.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="card p-5 hover:shadow-lg transition-shadow group">
+              <Link key={tool.href} href={tool.href} className="card p-4 sm:p-5 hover:shadow-lg transition-shadow group">
                 <ToolIcon icon={tool.icon} color={tool.color} />
-                <p className="font-semibold text-base mt-4 mb-1 group-hover:text-[#673DE6] transition-colors">{tool.label}</p>
-                <p className="text-sm" style={{ color: "var(--apple-text-secondary)" }}>{tool.desc}</p>
+                <p className="font-semibold text-sm sm:text-base mt-3 sm:mt-4 mb-1 group-hover:text-[#673DE6] transition-colors">{tool.label}</p>
+                <p className="text-xs sm:text-sm" style={{ color: "var(--apple-text-secondary)" }}>{tool.desc}</p>
               </Link>
             ))}
           </div>
