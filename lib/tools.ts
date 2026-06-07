@@ -76,4 +76,13 @@ export const tools: Tool[] = [
   { label: "Compress Video", href: "/compress-video", desc: "Shrink video size, no watermark.", icon: "compress", color: "#FF2D92", categories: ["image"] },
   { label: "Video to GIF", href: "/video-to-gif", desc: "Make a clean GIF from a video.", icon: "convertimg", color: "#FF2D92", categories: ["image"] },
   { label: "AI Image Upscaler", href: "/image-upscaler", desc: "Sharpen and enlarge photos up to 4x.", icon: "magic", color: "#FF2D92", categories: ["image"] },
+  // More PDF tools
+  { label: "Organize PDF", href: "/organize-pdf", desc: "Reorder, rotate, and delete pages.", icon: "split", color: "#FF5B47", categories: ["organize"] },
+  { label: "Crop PDF", href: "/crop-pdf", desc: "Trim margins from PDF pages.", icon: "resize", color: "#A855F7", categories: ["edit"] },
+  { label: "Redact PDF", href: "/redact-pdf", desc: "Permanently black out text.", icon: "watermark", color: "#5856D6", categories: ["security", "edit"] },
+  { label: "Edit PDF", href: "/edit-pdf", desc: "Add text anywhere on a PDF.", icon: "pagenum", color: "#A855F7", categories: ["edit"] },
+  { label: "Compare PDF", href: "/compare-pdf", desc: "Find text differences between PDFs.", icon: "extract", color: "#A855F7", categories: ["edit"] },
+  { label: "Scan to PDF", href: "/scan-to-pdf", desc: "Camera or images into a PDF.", icon: "img2pdf", color: "#FF5B47", categories: ["organize", "convert"] },
+  { label: "PDF to Text", href: "/pdf-to-text", desc: "Extract all text from a PDF.", icon: "word", color: "#FFB22C", categories: ["convert"] },
+  { label: "Repair PDF", href: "/repair-pdf", desc: "Fix a corrupted PDF file.", icon: "compress", color: "#34C759", categories: ["optimize"] },
 ];
