@@ -72,6 +72,12 @@ export const tools: Tool[] = [
   { label: "JSON Formatter", href: "/json-formatter", desc: "Beautify, validate, minify JSON.", icon: "extract", color: "#2B7BF3", categories: ["developer"] },
   { label: "Regex Tester", href: "/regex-tester", desc: "Test regex with live highlighting.", icon: "extract", color: "#2B7BF3", categories: ["developer"] },
   { label: ".env Validator", href: "/env-validator", desc: "Check env files for errors & leaks.", icon: "lock", color: "#2B7BF3", categories: ["developer"] },
+  { label: "Base64 Encode/Decode", href: "/base64", desc: "Text to Base64 and back.", icon: "convertimg", color: "#2B7BF3", categories: ["developer"] },
+  { label: "JWT Decoder", href: "/jwt-decoder", desc: "Decode JSON Web Tokens.", icon: "unlock", color: "#2B7BF3", categories: ["developer"] },
+  { label: "URL Encode/Decode", href: "/url-encoder", desc: "Percent-encode text for URLs.", icon: "convertimg", color: "#2B7BF3", categories: ["developer"] },
+  { label: "Hash Generator", href: "/hash-generator", desc: "SHA-256, SHA-512, and more.", icon: "lock", color: "#2B7BF3", categories: ["developer"] },
+  { label: "UUID Generator", href: "/uuid-generator", desc: "Bulk secure UUID v4.", icon: "pagenum", color: "#2B7BF3", categories: ["developer"] },
+  { label: "Text Diff Checker", href: "/text-diff", desc: "Compare two texts.", icon: "extract", color: "#2B7BF3", categories: ["developer"] },
   // Media (heavy, lazy-loaded)
   { label: "Compress Video", href: "/compress-video", desc: "Shrink video size, no watermark.", icon: "compress", color: "#FF2D92", categories: ["image"] },
   { label: "Video to GIF", href: "/video-to-gif", desc: "Make a clean GIF from a video.", icon: "convertimg", color: "#FF2D92", categories: ["image"] },

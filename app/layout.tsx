@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PWARegister from "@/components/PWARegister";
 
 const SITE = "https://www.iyonm.com";
 
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body className="min-h-screen flex flex-col" style={{ background: "var(--apple-white)", color: "var(--apple-black)" }}>
+        <PWARegister />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
