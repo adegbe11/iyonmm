@@ -8,6 +8,7 @@ import ToolIcon from "@/components/ToolIcon";
 import RotatingWord from "@/components/RotatingWord";
 import ToolsInAction from "@/components/ToolsInAction";
 import SmartDropzone from "@/components/SmartDropzone";
+import PrivacyBanner from "@/components/PrivacyBanner";
 
 export default function HomeClient() {
   const router = useRouter();
@@ -94,6 +95,8 @@ export default function HomeClient() {
           </div>
         </div>
       </section>
+
+      <PrivacyBanner />
 
       <ToolsInAction />
 
