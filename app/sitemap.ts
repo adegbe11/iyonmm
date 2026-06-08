@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { converters } from "@/lib/converters";
 import { compressTargets, resizePresets, compressPdfTargets, compressFormats, passportSpecs, guides } from "@/lib/seo-data";
+import { securePages } from "@/lib/secure-data";
 
 const BASE = "https://www.iyonm.com";
 
@@ -127,5 +128,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...converterEntries, ...compressEntries, ...resizeEntries, ...compressPdfEntries, ...compressFormatEntries, ...passportEntries, ...guideEntries];
+  const secureEntries = securePages.map((p) => ({
+    url: `${BASE}/secure/${p.slug}`,
+    lastModified: today,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticEntries, ...converterEntries, ...compressEntries, ...resizeEntries, ...compressPdfEntries, ...compressFormatEntries, ...passportEntries, ...guideEntries, ...secureEntries];
 }

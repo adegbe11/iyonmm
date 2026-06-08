@@ -62,7 +62,8 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "About", href: "/about" },
       { label: "vs iLovePDF", href: "/ilovepdf-alternative" },
-      { label: "Passport Photos", href: "/passport-photo/us" },
+      { label: "HIPAA-Friendly PDF Tools", href: "/secure/hipaa-compliant-pdf-tools" },
+      { label: "Offline PDF Tools", href: "/secure/offline-pdf-tools" },
       { label: "How-To Guides", href: "/how-to/how-to-compress-a-pdf" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },

@@ -29,6 +29,9 @@ export default function ToolShell({ title, subtitle, steps, faqs, badge, related
       {/* Tool area */}
       <div className="mb-8">{children}</div>
 
+      {/* Privacy proof + comparison (appears on every tool) */}
+      <PrivacyProof />
+
       {/* Ad slot above result */}
       <div className="ad-slot mb-8">Advertisement</div>
 
@@ -75,5 +78,41 @@ export default function ToolShell({ title, subtitle, steps, faqs, badge, related
       {/* Footer ad */}
       <div className="ad-slot">Advertisement</div>
     </div>
+  );
+}
+
+function PrivacyProof() {
+  return (
+    <section className="mb-8 rounded-2xl overflow-hidden" style={{ border: "1px solid var(--apple-border)" }}>
+      <div className="flex items-center gap-3 px-5 py-4" style={{ background: "#EDE7FB" }}>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--apple-blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>
+        <div>
+          <p className="text-sm font-semibold" style={{ color: "var(--apple-black)" }}>0 KB uploaded. Your file never leaves this browser tab.</p>
+          <p className="text-xs" style={{ color: "var(--apple-text-secondary)" }}>Open your browser&apos;s Network tab while you use this tool, you will see zero data sent to any server.</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 text-xs" style={{ background: "white" }}>
+        <div className="p-3 font-semibold" style={{ color: "var(--apple-text-secondary)" }}> </div>
+        <div className="p-3 text-center font-semibold" style={{ color: "var(--apple-blue)" }}>IYONM</div>
+        <div className="p-3 text-center font-semibold" style={{ color: "var(--apple-text-secondary)" }}>Cloud tools</div>
+        {[
+          ["Your files", "Stay on your device", "Uploaded to a server"],
+          ["File size limit", "None", "Capped on free plans"],
+          ["Works offline", "Yes", "No"],
+          ["Signup", "Never", "Pushed for limits"],
+        ].map((row, i) => (
+          <div key={i} className="contents">
+            <div className="p-3 border-t font-medium" style={{ borderColor: "var(--apple-border)" }}>{row[0]}</div>
+            <div className="p-3 border-t text-center flex items-center justify-center gap-1" style={{ borderColor: "var(--apple-border)" }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34C759" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>{row[1]}
+            </div>
+            <div className="p-3 border-t text-center" style={{ borderColor: "var(--apple-border)", color: "var(--apple-text-secondary)" }}>{row[2]}</div>
+          </div>
+        ))}
+      </div>
+      <Link href="/ilovepdf-alternative" className="block px-5 py-3 text-xs font-medium hover:underline" style={{ background: "var(--apple-gray)", color: "var(--apple-blue)" }}>
+        See the full IYONM vs iLovePDF comparison →
+      </Link>
+    </section>
   );
 }
