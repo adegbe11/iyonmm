@@ -24,15 +24,21 @@ export default function RemoveBgClient() {
     setStatusMsg("Loading AI model...");
 
     try {
-      // Dynamic import to avoid SSR issues
+      // The package's default export is the removeBackground function (per @imgly docs).
+      const mod = await import("@imgly/background-removal");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const bgRemoval = await import("@imgly/background-removal" as any);
-      const removeBackground = bgRemoval.removeBackground || bgRemoval.default?.removeBackground;
+      const removeBackground: (img: Blob, cfg?: any) => Promise<Blob> =
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (mod as any).default ?? (mod as any).removeBackground;
+      if (typeof removeBackground !== "function") throw new Error("Background removal module failed to load.");
       setProgress(30);
       setStatusMsg("Removing background...");
       const blob: Blob = await removeBackground(file, {
+        device: "cpu",
+        model: "isnet_fp16",
+        output: { format: "image/png" },
         progress: (_key: string, current: number, total: number) => {
-          setProgress(30 + Math.round((current / total) * 60));
+          if (total) setProgress(30 + Math.round((current / total) * 60));
         },
       });
       setProgress(100);
