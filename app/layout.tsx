@@ -9,11 +9,11 @@ const SITE = "https://www.iyonm.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Free Online PDF, Image & Video Tools, No Signup | IYONM",
+    default: "Free PDF, Video & Image Tools Online (100% Secure) | IYONM",
     template: "%s | IYONM",
   },
   description:
-    "IYONM is a free online multitool for PDFs, images, and video that runs 100% in your browser. Compress, convert, merge, edit, and more. Nothing uploaded, no limits, no signup.",
+    "Edit PDFs, compress videos, and convert images directly in your browser. 100% private with no server uploads, no data logs, and unlimited file sizes.",
   applicationName: "IYONM",
   keywords: [
     "free online tools", "pdf tools", "image tools", "compress pdf", "merge pdf", "pdf to word",
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     siteName: "IYONM",
     locale: "en_US",
     url: SITE,
-    title: "Free Online PDF, Image & Video Tools, No Signup",
+    title: "Free PDF, Video & Image Tools Online (100% Secure)",
     description:
-      "Compress, convert, merge, and edit PDFs, images, and video right in your browser. Nothing uploaded. No limits. No signup.",
+      "Edit PDFs, compress videos, and convert images directly in your browser. 100% private with no server uploads, no data logs, and unlimited file sizes.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Online PDF, Image & Video Tools, No Signup",
-    description: "100% in your browser. Nothing uploaded. No limits. No signup.",
+    title: "Free PDF, Video & Image Tools Online (100% Secure)",
+    description: "Edit PDFs, compress videos, convert images in your browser. No uploads, no logs, unlimited file sizes.",
   },
   robots: {
     index: true,

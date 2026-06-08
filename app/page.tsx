@@ -3,9 +3,9 @@ import HomeClient from "@/components/HomeClient";
 import { tools } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Free Online PDF, Image & Video Tools, No Signup | IYONM",
+  title: { absolute: "Free PDF, Video & Image Tools Online (100% Secure) | IYONM" },
   description:
-    "50+ free tools for PDFs, images, and video that run in your browser. Compress, convert, merge, edit, sign, and more. Nothing uploaded, no limits, no signup.",
+    "Edit PDFs, compress videos, and convert images directly in your browser. 100% private with no server uploads, no data logs, and unlimited file sizes.",
   alternates: { canonical: "/" },
 };
 
