@@ -1,7 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ToolShell from "@/components/ToolShell";
 import DropZone from "@/components/DropZone";
+
+// Use the GPU (WebGPU) when available for near-instant removal, fall back to CPU.
+function pickDevice(): "gpu" | "cpu" {
+  return typeof navigator !== "undefined" && "gpu" in navigator ? "gpu" : "cpu";
+}
+const MODEL = "isnet_fp16";
 
 export default function RemoveBgClient() {
   const [processing, setProcessing] = useState(false);
@@ -11,6 +17,23 @@ export default function RemoveBgClient() {
   const [progress, setProgress] = useState(0);
   const [statusMsg, setStatusMsg] = useState("");
   const [error, setError] = useState("");
+  const [ready, setReady] = useState(false);
+
+  // Warm the AI model the moment the page loads, so the first removal is instant
+  // instead of waiting ~30s for the download after the user drops a file.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const mod = await import("@imgly/background-removal");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const preload = (mod as any).preload;
+        if (preload) await preload({ device: pickDevice(), model: MODEL });
+        if (!cancelled) setReady(true);
+      } catch { /* will download on first use instead */ }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   async function handleFile(files: File[]) {
     const file = files[0];
@@ -34,8 +57,8 @@ export default function RemoveBgClient() {
       setProgress(30);
       setStatusMsg("Removing background...");
       const blob: Blob = await removeBackground(file, {
-        device: "cpu",
-        model: "isnet_fp16",
+        device: pickDevice(),
+        model: MODEL,
         output: { format: "image/png" },
         progress: (_key: string, current: number, total: number) => {
           if (total) setProgress(30 + Math.round((current / total) * 60));
@@ -64,7 +87,7 @@ export default function RemoveBgClient() {
       ]}
       faqs={[
         { q: "Is background removal really done in my browser?", a: "Yes. We use @imgly/background-removal, a WebAssembly AI model that runs 100% in your browser. Nothing is uploaded." },
-        { q: "Why is the first run slow?", a: "The first run downloads the AI model (~50MB) to your browser cache. All subsequent runs are instant." },
+        { q: "How fast is it?", a: "We start downloading the AI model the moment the page loads, so it is usually ready by the time you pick an image. On supported devices it runs on your GPU. After the first use the model is cached, so every removal after that is near-instant." },
         { q: "What types of images work best?", a: "Photos with a clear, distinct subject against a relatively contrasting background. People, products, and animals work great." },
         { q: "What format is the output?", a: "PNG with a transparent background, perfect for design tools, presentations, and web use." },
       ]}
@@ -78,7 +101,14 @@ export default function RemoveBgClient() {
       <div className="space-y-4">
         {error && <div className="p-3 rounded-xl text-sm" style={{ background: "#FFF0F0", color: "#FF3B30" }}>{error}</div>}
         {!processing && !resultUrl && (
-          <DropZone accept="image/jpeg,image/png,image/webp" onFiles={handleFile} label="Select image or drop image here" sublabel="Works best with people, products, and animals" />
+          <>
+            {ready && (
+              <div className="flex items-center justify-center gap-2 text-xs font-medium mb-1" style={{ color: "#34C759" }}>
+                <span className="w-2 h-2 rounded-full" style={{ background: "#34C759" }} /> AI model ready, removal will be instant
+              </div>
+            )}
+            <DropZone accept="image/jpeg,image/png,image/webp" onFiles={handleFile} label="Select image or drop image here" sublabel="Works best with people, products, and animals" />
+          </>
         )}
 
         {processing && (
