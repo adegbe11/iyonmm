@@ -62,12 +62,12 @@ export default function HomeClient() {
       {/* Filter pills + grid */}
       <section className="px-4 py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="no-scrollbar flex gap-2 overflow-x-auto whitespace-nowrap pb-2 mb-7 -mx-4 px-4 sm:flex-wrap sm:justify-center sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:mb-10">
+          <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-10">
             {categories.map((c) => (
               <button
                 key={c.key}
                 onClick={() => setActive(c.key)}
-                className="flex-shrink-0 px-4 sm:px-5 py-2 rounded-full text-sm font-medium transition-all"
+                className="px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all"
                 style={
                   active === c.key
                     ? { background: "var(--apple-black)", color: "white" }
