@@ -15,7 +15,7 @@ export default function Page() {
         <p><strong style={{ color: "var(--apple-black)" }}>IYONM</strong> stands for <strong style={{ color: "var(--apple-black)" }}>It&apos;s Your Online No-upload Multitool</strong>. It is a growing collection of free tools for PDFs, images, video, documents, and code that all run entirely in your web browser.</p>
         <p>Most online tools upload your files to a server to process them. We do the opposite: everything happens on your device. Your files never leave your computer, which makes IYONM faster and private by design.</p>
         <p>We believe useful tools should be free, instant, and free of friction. So there are no accounts, no file size limits, no watermarks, and no paywalls.</p>
-        <p>Have a tool you wish existed? Email <a className="underline" href="mailto:aseincollins@gmail.com">aseincollins@gmail.com</a>.</p>
+        <p>We are always adding new tools. Check back often for more.</p>
         <p><Link href="/" className="font-semibold" style={{ color: "var(--apple-blue)" }}>Browse all tools →</Link></p>
       </div>
     </div>

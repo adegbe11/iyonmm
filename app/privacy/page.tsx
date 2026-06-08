@@ -45,7 +45,7 @@ export default function Page() {
 
         <section>
           <h2 className="text-lg font-semibold mb-2">Contact</h2>
-          <p style={{ color: "var(--apple-text-secondary)" }}>Questions about this policy? Email aseincollins@gmail.com.</p>
+          <p style={{ color: "var(--apple-text-secondary)" }}>Questions about this policy? Reach out through the contact options on our website.</p>
         </section>
       </div>
     </div>
