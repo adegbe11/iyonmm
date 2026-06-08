@@ -7,6 +7,7 @@ import { compressTargets, resizePresets, compressPdfTargets, passportSpecs, guid
 import ToolIcon from "@/components/ToolIcon";
 import RotatingWord from "@/components/RotatingWord";
 import ToolsInAction from "@/components/ToolsInAction";
+import SmartDropzone from "@/components/SmartDropzone";
 
 export default function HomeClient() {
   const router = useRouter();
@@ -36,6 +37,9 @@ export default function HomeClient() {
           <p className="mx-auto mb-8 max-w-2xl" style={{ color: "var(--apple-text-secondary)", fontSize: "clamp(1.05rem, 2.5vw, 1.35rem)" }}>
             Stop jumping between tabs. Instantly audit contracts, compress videos, merge PDFs, format JSON, and upscale images in one click. 100% free, completely secure, and built right into your browser.
           </p>
+
+          {/* Universal smart dropzone: drop any file, auto-detect the right tool */}
+          <SmartDropzone />
 
           {/* Tool search */}
           <form onSubmit={onSearch} className="relative max-w-xl mx-auto mb-8 text-left">

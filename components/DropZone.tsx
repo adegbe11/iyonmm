@@ -1,5 +1,6 @@
 "use client";
-import { useRef, useState, DragEvent, ChangeEvent } from "react";
+import { useRef, useState, useEffect, DragEvent, ChangeEvent } from "react";
+import { takePendingFiles } from "@/lib/handoff";
 
 interface Props {
   accept: string;
@@ -12,6 +13,14 @@ interface Props {
 export default function DropZone({ accept, multiple = false, onFiles, label, sublabel }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
+
+  // If the user dropped a file on the homepage Universal Dropzone and chose this
+  // tool, load it automatically so they never have to select it twice.
+  useEffect(() => {
+    const handed = takePendingFiles();
+    if (handed && handed.length) onFiles(handed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleDrop(e: DragEvent) {
     e.preventDefault();
