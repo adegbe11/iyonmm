@@ -47,7 +47,7 @@ export default function CompressPdfToSizeClient({ target }: { target: CompressTa
     setStatus("Reading PDF...");
     try {
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const PDFLib = await import("pdf-lib");
       const pdfDoc = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
 

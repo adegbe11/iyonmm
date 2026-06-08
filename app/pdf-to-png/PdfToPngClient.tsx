@@ -21,7 +21,7 @@ export default function PdfToPngClient() {
     setProgress(0);
     try {
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
       const total = pdf.numPages;
       const out: PageResult[] = [];

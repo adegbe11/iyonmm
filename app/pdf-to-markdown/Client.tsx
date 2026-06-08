@@ -15,7 +15,7 @@ export default function Client() {
     setFileName(file.name); setProcessing(true); setMd(""); setProgress(0);
     try {
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
       let blocks: ReturnType<typeof reflowPage> = [];
       for (let i = 1; i <= pdf.numPages; i++) {

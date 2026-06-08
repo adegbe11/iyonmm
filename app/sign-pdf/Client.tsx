@@ -33,7 +33,7 @@ export default function Client() {
       const buf = await f.arrayBuffer();
       setBytes(buf); setFileName(f.name);
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const pdf = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
       setNumPages(pdf.numPages); setPageIdx(0);
       await renderPage(buf, 0);
@@ -42,7 +42,7 @@ export default function Client() {
 
   async function renderPage(buf: ArrayBuffer, idx: number) {
     const pdfjsLib = await import("pdfjs-dist");
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
     const pdf = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
     const page = await pdf.getPage(idx + 1);
     const vp = page.getViewport({ scale: 1.4 });

@@ -24,14 +24,14 @@ export default function Client() {
     setFileName(f.name); setResultUrl(null); setRects({});
     const buf = await f.arrayBuffer(); setBytes(buf);
     const pdfjsLib = await import("pdfjs-dist");
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
     const pdf = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
     setNumPages(pdf.numPages); setIdx(0); await render(buf, 0);
   }
 
   async function render(buf: ArrayBuffer, i: number) {
     const pdfjsLib = await import("pdfjs-dist");
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
     const pdf = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
     const page = await pdf.getPage(i + 1);
     const vp = page.getViewport({ scale: 1.3 });
@@ -53,7 +53,7 @@ export default function Client() {
     if (!bytes) return; setBusy(true);
     try {
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const { PDFDocument } = await import("pdf-lib");
       const pdf = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
       const out = await PDFDocument.create();

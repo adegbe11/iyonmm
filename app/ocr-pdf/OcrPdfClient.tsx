@@ -28,7 +28,7 @@ export default function OcrPdfClient() {
       if (file.type === "application/pdf" || file.name.endsWith(".pdf")) {
         // For PDFs: render page 1 via PDF.js, then OCR the canvas
         const pdfjsLib = await import("pdfjs-dist");
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
         const buf = await file.arrayBuffer();
         const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
         let allText = "";

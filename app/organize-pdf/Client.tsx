@@ -18,7 +18,7 @@ export default function Client() {
     try {
       const buf = await f.arrayBuffer(); setBytes(buf);
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const pdf = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
       const out: Pg[] = [];
       for (let i = 1; i <= pdf.numPages; i++) {

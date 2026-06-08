@@ -18,7 +18,7 @@ export default function PdfToWordClient() {
     setProgress(0);
     try {
       const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
       const { Document, Packer, Paragraph, TextRun } = await import("docx");
 
       const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
