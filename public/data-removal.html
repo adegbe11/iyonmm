@@ -257,7 +257,7 @@ footer a:hover{color:#fff}
       <h1>Stop <span class="flip-slot" id="flip"><span id="flip-word">spam calls</span><span class="bar"></span></span><br>at the source. Delete your data from the internet.</h1>
       <p class="hero-sub">Data brokers and people search sites sell your address, phone number and family details to anyone who pays. Erasa helps you remove your personal information from the internet. Free legal opt-out letters, every data broker opt-out link, and proof of each deletion.</p>
       <div class="hero-ctas">
-        <a class="btn orange" href="#kit">Generate my deletion letters, free</a>
+        <a class="btn orange" href="#kit">Delete my data from data brokers</a>
         <a class="btn ghost" href="#vs">Compare to Incogni</a>
       </div>
       <p class="hero-micro">// CCPA · GDPR · UK GDPR · NDPA · California DROP supported</p>
@@ -331,6 +331,8 @@ footer a:hover{color:#fff}
           <div class="field"><label for="g-name">Your full name</label><input id="g-name" type="text" placeholder="e.g. Jane A. Doe" autocomplete="off"></div>
           <div class="field"><label for="g-email">Your email</label><input id="g-email" type="email" placeholder="you@email.com" autocomplete="off"></div>
           <div class="field"><label for="g-city">City / region</label><input id="g-city" type="text" placeholder="e.g. Austin, Texas" autocomplete="off"></div>
+          <div class="field"><label for="g-phone">Phone (optional)</label><input id="g-phone" type="text" placeholder="e.g. (512) 555-0147" autocomplete="off"></div>
+          <div class="field"><label for="g-address">Street address (optional)</label><input id="g-address" type="text" placeholder="e.g. 14 Maple Street" autocomplete="off"></div>
           <div class="field"><label for="g-law">Your privacy law</label>
             <select id="g-law">
               <option value="ccpa">United States, CCPA / state privacy law</option>
@@ -343,7 +345,11 @@ footer a:hover{color:#fff}
         </div>
         <label class="eyebrow" style="color:var(--ink-soft)">Select the people search sites to send your data deletion request to</label>
         <div class="broker-grid" id="broker-grid"></div>
-        <button class="btn orange" id="generate-btn" type="button">Generate my deletion letters</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="btn orange" id="auto-btn" type="button">Delete my data from data brokers</button>
+          <button class="btn ghost" id="generate-btn" type="button">Just generate the letters</button>
+        </div>
+        <p id="auto-note" style="font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:10px">// One click opens every broker, fills your details, and submits where safe. Needs the free Erasa helper extension; without it you get the letters instead.</p>
         <div class="letters-out" id="letters-out" aria-live="polite"></div>
       </div>
 
@@ -668,6 +674,40 @@ document.getElementById('generate-btn').addEventListener('click', ()=>{
     out.appendChild(div);
   });
   out.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+
+// ====== AUTOMATIC REMOVAL (helper extension bridge) ======
+let erasaHelper = false;
+window.addEventListener('message', e=>{
+  if(e.source!==window || !e.data || !e.data.__erasa) return;
+  if(e.data.__erasa==='ready'){
+    erasaHelper = true;
+    document.getElementById('auto-note').innerHTML = '// Helper detected. One click opens all '+e.data.count+' brokers, fills your details, and submits where safe. Solve any CAPTCHA it flags.';
+  }
+  if(e.data.__erasa==='started'){
+    document.getElementById('auto-note').innerHTML = '// <b style="color:var(--cleared)">Running.</b> '+e.data.count+' brokers are opening in background tabs with your details filled. Check the tabs for any CAPTCHA, then close them as each confirms.';
+  }
+});
+document.getElementById('auto-btn').addEventListener('click', ()=>{
+  const name = document.getElementById('g-name').value.trim();
+  const email = document.getElementById('g-email').value.trim();
+  if(!name){ document.getElementById('auto-note').innerHTML = '// <b style="color:var(--exposed)">Enter your full name first</b>, then click again.'; document.getElementById('g-name').focus(); return; }
+  const parts = name.split(/\s+/);
+  const profile = {
+    firstName: parts[0]||'', lastName: parts.slice(1).join(' ')||'',
+    fullName: name, email: email,
+    phone: document.getElementById('g-phone').value.trim(),
+    address: document.getElementById('g-address').value.trim(),
+    city: (document.getElementById('g-city').value.split(',')[0]||'').trim(),
+    state: (document.getElementById('g-city').value.split(',')[1]||'').trim(),
+    zip: '', autosubmit: true
+  };
+  if(erasaHelper){
+    window.postMessage({__erasa:'start', profile}, '*');
+  } else {
+    document.getElementById('auto-note').innerHTML = '// <b style="color:var(--exposed)">Helper extension not installed.</b> Install it once (chrome://extensions → Developer mode → Load unpacked → the Erasa extension folder), reload this page, and this button runs everything automatically. Generating your letters now as the manual route:';
+    document.getElementById('generate-btn').click();
+  }
 });
 
 // ====== EXPOSURE EXPLORER ======

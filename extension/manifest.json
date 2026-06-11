@@ -35,6 +35,12 @@
       "js": ["content.js"],
       "run_at": "document_idle",
       "all_frames": false
+    },
+    {
+      "matches": ["*://www.iyonm.com/*", "*://iyonm.com/*", "http://localhost/*"],
+      "js": ["brokers.js", "bridge.js"],
+      "run_at": "document_idle",
+      "all_frames": false
     }
   ]
 }
