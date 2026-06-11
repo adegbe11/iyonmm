@@ -61,6 +61,7 @@ const staticPages = [
   { path: "/uuid-generator", priority: 0.8 },
   { path: "/text-diff", priority: 0.8 },
   { path: "/blog/ilovepdf-vs-iyonm", priority: 0.85 },
+  { path: "/data-removal.html", priority: 0.7 },
   { path: "/compress-video", priority: 0.9 },
   { path: "/video-to-gif", priority: 0.9 },
   { path: "/image-upscaler", priority: 0.9 },
