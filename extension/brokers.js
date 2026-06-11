@@ -1,0 +1,35 @@
+// Broker opt-out targets. Shared by the popup and background.
+// method "form" opens the opt-out page; the content script auto-fills it.
+// method "email" opens a pre-filled deletion email in the user's mail client.
+self.ERASA_BROKERS = [
+  { slug: "spokeo", name: "Spokeo", url: "https://www.spokeo.com/optout", email: "privacy@spokeo.com", method: "form" },
+  { slug: "whitepages", name: "Whitepages", url: "https://www.whitepages.com/suppression-requests", email: "support@whitepages.com", method: "form" },
+  { slug: "beenverified", name: "BeenVerified", url: "https://www.beenverified.com/app/optout/search", email: "privacy@beenverified.com", method: "form" },
+  { slug: "truepeoplesearch", name: "TruePeopleSearch", url: "https://www.truepeoplesearch.com/removal", email: "support@truepeoplesearch.com", method: "form" },
+  { slug: "fastpeoplesearch", name: "FastPeopleSearch", url: "https://www.fastpeoplesearch.com/removal", email: "support@fastpeoplesearch.com", method: "form" },
+  { slug: "radaris", name: "Radaris", url: "https://radaris.com/control/privacy", email: "support@radaris.com", method: "form" },
+  { slug: "intelius", name: "Intelius", url: "https://suppression.peopleconnect.us", email: "privacy@intelius.com", method: "form" },
+  { slug: "truthfinder", name: "TruthFinder", url: "https://suppression.peopleconnect.us", email: "privacy@truthfinder.com", method: "form" },
+  { slug: "instantcheckmate", name: "Instant Checkmate", url: "https://suppression.peopleconnect.us", email: "privacy@instantcheckmate.com", method: "form" },
+  { slug: "mylife", name: "MyLife", url: "https://www.mylife.com/ccpa/index.pubview", email: "privacy@mylife.com", method: "form" },
+  { slug: "familytreenow", name: "FamilyTreeNow", url: "https://www.familytreenow.com/optout", email: "support@familytreenow.com", method: "form" },
+  { slug: "national-public-data", name: "National Public Data", url: "", email: "privacy@nationalpublicdata.com", method: "email" },
+  { slug: "peoplefinders", name: "PeopleFinders", url: "https://www.peoplefinders.com/opt-out", email: "privacy@peoplefinders.com", method: "form" },
+  { slug: "ussearch", name: "US Search", url: "https://www.ussearch.com/opt-out", email: "privacy@ussearch.com", method: "form" },
+  { slug: "nuwber", name: "Nuwber", url: "https://nuwber.com/removal/link", email: "support@nuwber.com", method: "form" },
+  { slug: "usphonebook", name: "USPhonebook", url: "https://www.usphonebook.com/opt-out", email: "support@usphonebook.com", method: "form" },
+  { slug: "checkpeople", name: "CheckPeople", url: "https://www.checkpeople.com/opt-out", email: "support@checkpeople.com", method: "form" },
+  { slug: "peoplelooker", name: "PeopleLooker", url: "https://www.peoplelooker.com/f/optout/search", email: "privacy@peoplelooker.com", method: "form" },
+  { slug: "advancedbackgroundchecks", name: "Advanced Background Checks", url: "https://www.advancedbackgroundchecks.com/removal", email: "support@advancedbackgroundchecks.com", method: "form" },
+  { slug: "searchpeoplefree", name: "SearchPeopleFree", url: "https://www.searchpeoplefree.com/opt-out", email: "support@searchpeoplefree.com", method: "form" },
+  { slug: "anywho", name: "AnyWho", url: "https://www.anywho.com/optout", email: "privacy@anywho.com", method: "form" },
+  { slug: "zabasearch", name: "ZabaSearch", url: "https://www.intelius.com/opt-out", email: "privacy@intelius.com", method: "form" },
+  { slug: "peekyou", name: "PeekYou", url: "https://www.peekyou.com/about/contact/optout", email: "support@peekyou.com", method: "form" },
+  { slug: "socialcatfish", name: "Social Catfish", url: "https://socialcatfish.com/opt-out", email: "privacy@socialcatfish.com", method: "form" },
+  { slug: "clustrmaps", name: "ClustrMaps", url: "https://clustrmaps.com/bl/opt-out", email: "privacy@clustrmaps.com", method: "form" },
+  { slug: "rocketreach", name: "RocketReach", url: "https://rocketreach.co/optout", email: "privacy@rocketreach.co", method: "form" },
+  { slug: "apollo", name: "Apollo.io", url: "https://apolloio.zendesk.com/hc/en-us/articles/4413891899533", email: "privacy@apollo.io", method: "form" },
+  { slug: "lexisnexis", name: "LexisNexis", url: "https://optout.lexisnexis.com", email: "privacy.information.mgr@lexisnexis.com", method: "form" },
+  { slug: "acxiom", name: "Acxiom", url: "https://isapps.acxiom.com/optout/optout.aspx", email: "consumeradvo@acxiom.com", method: "form" },
+  { slug: "epsilon", name: "Epsilon", url: "https://www.epsilon.com/us/consumer-information", email: "privacy@epsilon.com", method: "form" }
+];
