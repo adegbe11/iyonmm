@@ -242,6 +242,7 @@ footer a:hover{color:#fff}
       <a href="#kit">Free Removal Kit</a>
       <a href="#exposed">What they know</a>
       <a href="#vs">Compare</a>
+      <a href="#scan">Scan</a>
       <a href="#calc">Time saved</a>
       <a href="#faq">FAQ</a>
       <a class="btn" href="#kit">Delete my data</a>
@@ -302,6 +303,28 @@ footer a:hover{color:#fff}
     </div>
   </div>
 </header>
+
+<!-- ====== SECTION 1.5 · EXPOSURE SCAN ====== -->
+<section id="scan">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Free exposure scan</span>
+      <h2>Scan where your information is exposed</h2>
+      <p class="lede">Type your name to see the data broker sites that publish people like you. Open each to confirm your real listing, then send removals to every one of them at once. Nothing you type is uploaded.</p>
+      <div class="form-grid" style="max-width:660px">
+        <div class="field"><label for="s-name">Your full name</label><input id="s-name" type="text" placeholder="e.g. Jane Doe" autocomplete="off"></div>
+        <div class="field"><label for="s-city">City / state (optional)</label><input id="s-city" type="text" placeholder="e.g. Austin TX" autocomplete="off"></div>
+      </div>
+      <button class="btn orange" id="scan-btn" type="button">Scan my exposure</button>
+      <p id="scan-status" class="mf-caption" style="margin-top:14px"></p>
+    </div>
+    <div class="exp-grid" id="scan-results" style="margin-top:8px"></div>
+    <div id="scan-cta" class="reveal" style="margin-top:26px;display:none">
+      <a class="btn orange" href="#kit">Send removal requests to all &rarr;</a>
+      <p class="mf-caption" style="margin-top:10px">// One click below opens every broker, fills your details, and submits where safe (needs the free helper extension).</p>
+    </div>
+  </div>
+</section>
 
 <!-- ====== SECTION 2 · FREE REMOVAL KIT ====== -->
 <section id="kit">
@@ -801,6 +824,38 @@ function updateCalc(){
 }
 range.addEventListener('input', updateCalc);
 updateCalc();
+
+// ====== EXPOSURE SCAN ======
+(function(){
+  const btn=document.getElementById('scan-btn'); if(!btn) return;
+  const results=document.getElementById('scan-results');
+  const status=document.getElementById('scan-status');
+  const cta=document.getElementById('scan-cta');
+  function domainOf(u){ const m=(u||'').match(/https?:\/\/(?:www\.)?([^\/]+)/); return m?m[1]:''; }
+  btn.addEventListener('click', async ()=>{
+    const name=(document.getElementById('s-name').value||'').trim();
+    if(!name){ status.innerHTML='// <b style="color:var(--exposed)">Type your name first.</b>'; document.getElementById('s-name').focus(); return; }
+    const city=(document.getElementById('s-city').value||'').trim();
+    results.innerHTML=''; cta.style.display='none';
+    const q=encodeURIComponent('"'+name+'"'+(city?' '+city:''));
+    for(let i=0;i<BROKERS.length;i++){
+      const b=BROKERS[i];
+      status.innerHTML='// Checking <b>'+b.name+'</b> ('+(i+1)+'/'+BROKERS.length+')';
+      await new Promise(r=>setTimeout(r,110));
+      const dom=domainOf(b.url);
+      const gs='https://www.google.com/search?q='+q+(dom?encodeURIComponent(' site:'+dom):'');
+      const card=document.createElement('div');
+      card.className='exp-card open';
+      card.innerHTML='<div class="exp-head"><h3>'+b.name+'</h3><span class="sold">LIKELY EXPOSED</span></div>'+
+        '<div class="exp-more">Publishes: '+b.exposes+'<br><br>'+
+        '<a href="'+gs+'" target="_blank" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Check my listing &rarr;</a>'+
+        '&nbsp;&nbsp;&nbsp;<a href="'+b.url+'" target="_blank" rel="noopener" style="color:var(--exposed);font-weight:600;text-decoration:underline">Remove &rarr;</a></div>';
+      results.appendChild(card);
+    }
+    status.innerHTML='// Scan complete. <b style="color:var(--exposed)">'+BROKERS.length+' data broker sites</b> publish people like you. Open each to confirm your listing, or send removals to all below.';
+    cta.style.display='block';
+  });
+})();
 </script>
 </body>
 </html>
