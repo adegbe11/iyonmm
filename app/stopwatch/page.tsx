@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Online Stopwatch, Free with Lap Times",
   description: "A free, precise online stopwatch with lap times. Start, pause, reset. Accurate even in background tabs. No signup.",
-  alternates: { canonical: "https://www.iyonm.com/stopwatch" },
+  alternates: { canonical: "https://iyonm.com/stopwatch" },
 };
 
 const faqs = [

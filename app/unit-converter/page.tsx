@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Unit Converter, Inches to cm, kg to lb & More (Free)",
   description: "Convert length, weight, and temperature instantly. Inches to cm, cm to inches, kg to lb, Celsius to Fahrenheit, and more. Free and private.",
-  alternates: { canonical: "https://www.iyonm.com/unit-converter" },
+  alternates: { canonical: "https://iyonm.com/unit-converter" },
 };
 
 const faqs = [

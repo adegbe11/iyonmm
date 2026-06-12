@@ -65,7 +65,7 @@ export function widgetJsonLd(name: string, slug: string, faqs: { q: string; a: s
     "@graph": [
       { "@type": "SoftwareApplication", name, applicationCategory: "UtilitiesApplication", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } },
       { "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name, item: `https://www.iyonm.com/${slug}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name, item: `https://iyonm.com/${slug}` }] },
     ],
   };
 }

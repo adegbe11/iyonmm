@@ -4,7 +4,7 @@ import MergePdfClient from "./MergePdfClient";
 export const metadata: Metadata = {
   title: "Merge PDF Online Free, Combine PDFs Fast",
   description: "Combine multiple PDF files into one. Free, no upload, no limits. Drag to reorder, then download your merged PDF.",
-  alternates: { canonical: "https://www.iyonm.com/merge-pdf" },
+  alternates: { canonical: "https://iyonm.com/merge-pdf" },
 };
 
 const jsonLd = {
@@ -20,7 +20,7 @@ const jsonLd = {
         { "@type": "Question", name: "Can I reorder the files before merging?", acceptedAnswer: { "@type": "Answer", text: "Yes. Drag and drop to reorder your PDFs before downloading." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "Merge PDF", item: "https://www.iyonm.com/merge-pdf" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "Merge PDF", item: "https://iyonm.com/merge-pdf" }] },
   ],
 };
 

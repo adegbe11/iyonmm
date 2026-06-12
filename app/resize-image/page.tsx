@@ -4,7 +4,7 @@ import ResizeImageClient from "./ResizeImageClient";
 export const metadata: Metadata = {
   title: "Resize Image Online Free, Change Image Size",
   description: "Resize any image to exact pixel dimensions or by percentage. Free, instant, nothing uploaded. Supports JPEG, PNG, WebP.",
-  alternates: { canonical: "https://www.iyonm.com/resize-image" },
+  alternates: { canonical: "https://iyonm.com/resize-image" },
 };
 
 export default function ResizeImagePage() {

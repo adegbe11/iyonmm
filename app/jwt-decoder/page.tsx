@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "JWT Decoder Online Free, Decode JSON Web Tokens",
   description: "Decode a JWT to read its header and payload. Private and free, runs entirely in your browser. Your token never leaves your device.",
-  alternates: { canonical: "https://www.iyonm.com/jwt-decoder" },
+  alternates: { canonical: "https://iyonm.com/jwt-decoder" },
 };
 
 const faqs = [

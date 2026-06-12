@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PWARegister from "@/components/PWARegister";
 
-const SITE = "https://www.iyonm.com";
+const SITE = "https://iyonm.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),

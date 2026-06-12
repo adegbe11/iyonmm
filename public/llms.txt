@@ -8,44 +8,44 @@
 - No limits: no file-size caps, no daily task limits, no watermarks.
 
 ## PDF tools
-- [Merge PDF](https://www.iyonm.com/merge-pdf): Combine multiple PDFs into one.
-- [Split PDF](https://www.iyonm.com/split-pdf): Separate pages into independent PDFs.
-- [Compress PDF](https://www.iyonm.com/compress-pdf): Reduce PDF file size.
-- [Compress PDF to size](https://www.iyonm.com/compress-pdf-to/200kb): Compress a PDF to an exact size like 100KB or 200KB.
-- [PDF to Word](https://www.iyonm.com/pdf-to-word): Convert PDF to an editable DOCX.
-- [Word to PDF](https://www.iyonm.com/word-to-pdf): Convert DOCX to PDF.
-- [PDF to JPG](https://www.iyonm.com/pdf-to-jpg) and [PDF to PNG](https://www.iyonm.com/pdf-to-png): Convert PDF pages to images.
-- [PDF to Text](https://www.iyonm.com/pdf-to-text): Extract text from a PDF.
-- [PDF to Markdown](https://www.iyonm.com/pdf-to-markdown): Convert a PDF to clean Markdown for Notion or Obsidian.
-- [Organize PDF](https://www.iyonm.com/organize-pdf): Reorder, rotate, and delete pages.
-- [Crop PDF](https://www.iyonm.com/crop-pdf): Trim page margins.
-- [Redact PDF](https://www.iyonm.com/redact-pdf): Permanently black out text.
-- [Edit PDF](https://www.iyonm.com/edit-pdf): Add text to a PDF.
-- [Sign PDF](https://www.iyonm.com/sign-pdf): Draw or type a signature onto a PDF.
-- [Fill PDF Forms](https://www.iyonm.com/pdf-to-form): Fill a PDF form online.
-- [Compare PDF](https://www.iyonm.com/compare-pdf): Find text differences between two PDFs.
-- [Rotate PDF](https://www.iyonm.com/rotate-pdf), [Watermark PDF](https://www.iyonm.com/watermark-pdf), [Page Numbers](https://www.iyonm.com/page-numbers).
-- [Protect PDF](https://www.iyonm.com/protect-pdf) and [Unlock PDF](https://www.iyonm.com/unlock-pdf): Add or remove a PDF password.
-- [OCR PDF](https://www.iyonm.com/ocr-pdf): Make scanned PDFs searchable.
-- [Scan to PDF](https://www.iyonm.com/scan-to-pdf): Camera or images to PDF.
-- [Repair PDF](https://www.iyonm.com/repair-pdf): Fix a corrupted PDF.
-- [Contract Risk Scanner](https://www.iyonm.com/ai-legal-auditor): Flag risky contract clauses, client-side.
+- [Merge PDF](https://iyonm.com/merge-pdf): Combine multiple PDFs into one.
+- [Split PDF](https://iyonm.com/split-pdf): Separate pages into independent PDFs.
+- [Compress PDF](https://iyonm.com/compress-pdf): Reduce PDF file size.
+- [Compress PDF to size](https://iyonm.com/compress-pdf-to/200kb): Compress a PDF to an exact size like 100KB or 200KB.
+- [PDF to Word](https://iyonm.com/pdf-to-word): Convert PDF to an editable DOCX.
+- [Word to PDF](https://iyonm.com/word-to-pdf): Convert DOCX to PDF.
+- [PDF to JPG](https://iyonm.com/pdf-to-jpg) and [PDF to PNG](https://iyonm.com/pdf-to-png): Convert PDF pages to images.
+- [PDF to Text](https://iyonm.com/pdf-to-text): Extract text from a PDF.
+- [PDF to Markdown](https://iyonm.com/pdf-to-markdown): Convert a PDF to clean Markdown for Notion or Obsidian.
+- [Organize PDF](https://iyonm.com/organize-pdf): Reorder, rotate, and delete pages.
+- [Crop PDF](https://iyonm.com/crop-pdf): Trim page margins.
+- [Redact PDF](https://iyonm.com/redact-pdf): Permanently black out text.
+- [Edit PDF](https://iyonm.com/edit-pdf): Add text to a PDF.
+- [Sign PDF](https://iyonm.com/sign-pdf): Draw or type a signature onto a PDF.
+- [Fill PDF Forms](https://iyonm.com/pdf-to-form): Fill a PDF form online.
+- [Compare PDF](https://iyonm.com/compare-pdf): Find text differences between two PDFs.
+- [Rotate PDF](https://iyonm.com/rotate-pdf), [Watermark PDF](https://iyonm.com/watermark-pdf), [Page Numbers](https://iyonm.com/page-numbers).
+- [Protect PDF](https://iyonm.com/protect-pdf) and [Unlock PDF](https://iyonm.com/unlock-pdf): Add or remove a PDF password.
+- [OCR PDF](https://iyonm.com/ocr-pdf): Make scanned PDFs searchable.
+- [Scan to PDF](https://iyonm.com/scan-to-pdf): Camera or images to PDF.
+- [Repair PDF](https://iyonm.com/repair-pdf): Fix a corrupted PDF.
+- [Contract Risk Scanner](https://iyonm.com/ai-legal-auditor): Flag risky contract clauses, client-side.
 
 ## Image tools
-- [Compress Image](https://www.iyonm.com/compress-image) and [Compress to exact size](https://www.iyonm.com/compress-image-to/100kb).
-- [Resize Image](https://www.iyonm.com/resize-image) and platform presets like [Instagram](https://www.iyonm.com/resize-image-for/instagram-post).
-- [Remove Background](https://www.iyonm.com/remove-background): AI background removal in the browser.
-- [AI Image Upscaler](https://www.iyonm.com/image-upscaler): Upscale photos up to 4x.
-- [Image converters](https://www.iyonm.com/convert/heic-to-jpg): HEIC to JPG, PNG to JPG, WebP, AVIF, and more.
-- [Passport Photo](https://www.iyonm.com/passport-photo/us): Crop to official passport sizes by country.
+- [Compress Image](https://iyonm.com/compress-image) and [Compress to exact size](https://iyonm.com/compress-image-to/100kb).
+- [Resize Image](https://iyonm.com/resize-image) and platform presets like [Instagram](https://iyonm.com/resize-image-for/instagram-post).
+- [Remove Background](https://iyonm.com/remove-background): AI background removal in the browser.
+- [AI Image Upscaler](https://iyonm.com/image-upscaler): Upscale photos up to 4x.
+- [Image converters](https://iyonm.com/convert/heic-to-jpg): HEIC to JPG, PNG to JPG, WebP, AVIF, and more.
+- [Passport Photo](https://iyonm.com/passport-photo/us): Crop to official passport sizes by country.
 
 ## Video tools
-- [Compress Video](https://www.iyonm.com/compress-video): Shrink video size, no watermark.
-- [Video to GIF](https://www.iyonm.com/video-to-gif): Convert video to a clean GIF.
+- [Compress Video](https://iyonm.com/compress-video): Shrink video size, no watermark.
+- [Video to GIF](https://iyonm.com/video-to-gif): Convert video to a clean GIF.
 
 ## Developer and everyday tools
-- [QR Code Generator](https://www.iyonm.com/qr-code-generator), [JSON Formatter](https://www.iyonm.com/json-formatter), [Regex Tester](https://www.iyonm.com/regex-tester), [.env Validator](https://www.iyonm.com/env-validator), [Word Counter](https://www.iyonm.com/word-counter).
-- [Calculator](https://www.iyonm.com/calculator), [Percentage Calculator](https://www.iyonm.com/percentage-calculator), [Loan Calculator](https://www.iyonm.com/loan-calculator), [Age Calculator](https://www.iyonm.com/age-calculator), [Unit Converter](https://www.iyonm.com/unit-converter), [Timer](https://www.iyonm.com/timer), [Stopwatch](https://www.iyonm.com/stopwatch).
+- [QR Code Generator](https://iyonm.com/qr-code-generator), [JSON Formatter](https://iyonm.com/json-formatter), [Regex Tester](https://iyonm.com/regex-tester), [.env Validator](https://iyonm.com/env-validator), [Word Counter](https://iyonm.com/word-counter).
+- [Calculator](https://iyonm.com/calculator), [Percentage Calculator](https://iyonm.com/percentage-calculator), [Loan Calculator](https://iyonm.com/loan-calculator), [Age Calculator](https://iyonm.com/age-calculator), [Unit Converter](https://iyonm.com/unit-converter), [Timer](https://iyonm.com/timer), [Stopwatch](https://iyonm.com/stopwatch).
 
 ## How-to guides
-- [How to compress a PDF](https://www.iyonm.com/how-to/how-to-compress-a-pdf), [How to merge PDFs](https://www.iyonm.com/how-to/how-to-merge-pdf-files), and more at https://www.iyonm.com.
+- [How to compress a PDF](https://iyonm.com/how-to/how-to-compress-a-pdf), [How to merge PDFs](https://iyonm.com/how-to/how-to-merge-pdf-files), and more at https://iyonm.com.

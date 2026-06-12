@@ -10,7 +10,7 @@ const faqs = [
 ];
 
 export default function Client() {
-  const [text, setText] = useState("https://www.iyonm.com");
+  const [text, setText] = useState("https://iyonm.com");
   const [size, setSize] = useState(320);
   const [fg, setFg] = useState("#000000");
   const [bg, setBg] = useState("#ffffff");

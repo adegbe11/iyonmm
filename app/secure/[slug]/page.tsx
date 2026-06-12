@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { securePages, getSecurePage } from "@/lib/secure-data";
 
-const SITE = "https://www.iyonm.com";
+const SITE = "https://iyonm.com";
 
 export function generateStaticParams() {
   return securePages.map((p) => ({ slug: p.slug }));

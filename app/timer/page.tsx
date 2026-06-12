@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Online Timer, Free Countdown with Alarm",
   description: "A free online countdown timer with a sound alert. Set minutes and seconds, start, pause, reset. Accurate even in background tabs.",
-  alternates: { canonical: "https://www.iyonm.com/timer" },
+  alternates: { canonical: "https://iyonm.com/timer" },
 };
 
 const faqs = [

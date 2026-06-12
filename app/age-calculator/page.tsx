@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Age Calculator, Exact Age in Years, Months & Days",
   description: "Calculate your exact age in years, months, days, weeks, and total days. Free, instant, private. Works for any two dates.",
-  alternates: { canonical: "https://www.iyonm.com/age-calculator" },
+  alternates: { canonical: "https://iyonm.com/age-calculator" },
 };
 
 const faqs = [

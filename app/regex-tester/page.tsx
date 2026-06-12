@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Regex Tester, Free Online Regular Expression Tester",
   description: "Test JavaScript regular expressions with live match highlighting and capture groups. Free, private, runs in your browser.",
-  alternates: { canonical: "https://www.iyonm.com/regex-tester" },
+  alternates: { canonical: "https://iyonm.com/regex-tester" },
 };
 
 const faqs = [

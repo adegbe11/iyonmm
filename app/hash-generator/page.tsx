@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Hash Generator Online Free, SHA-256, SHA-512 & More",
   description: "Generate SHA-256, SHA-1, SHA-384, and SHA-512 hashes of any text. Free, private, runs entirely in your browser with Web Crypto.",
-  alternates: { canonical: "https://www.iyonm.com/hash-generator" },
+  alternates: { canonical: "https://iyonm.com/hash-generator" },
 };
 
 const faqs = [

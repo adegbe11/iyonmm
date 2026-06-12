@@ -4,7 +4,7 @@ import PdfToPngClient from "./PdfToPngClient";
 export const metadata: Metadata = {
   title: "PDF to PNG Online Free, Convert PDF Pages to PNG",
   description: "Convert every page of your PDF to high quality PNG images. Free, nothing uploaded, runs in your browser. Download each page or all at once.",
-  alternates: { canonical: "https://www.iyonm.com/pdf-to-png" },
+  alternates: { canonical: "https://iyonm.com/pdf-to-png" },
 };
 
 const jsonLd = {
@@ -19,7 +19,7 @@ const jsonLd = {
         { "@type": "Question", name: "Is there a page limit?", acceptedAnswer: { "@type": "Answer", text: "No. Convert PDFs of any length." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "PDF to PNG", item: "https://www.iyonm.com/pdf-to-png" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "PDF to PNG", item: "https://iyonm.com/pdf-to-png" }] },
   ],
 };
 

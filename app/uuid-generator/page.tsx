@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "UUID Generator Online Free, Bulk UUID v4",
   description: "Generate secure UUID v4 identifiers in bulk. Free, private, runs entirely in your browser. Copy one or all.",
-  alternates: { canonical: "https://www.iyonm.com/uuid-generator" },
+  alternates: { canonical: "https://iyonm.com/uuid-generator" },
 };
 
 const faqs = [

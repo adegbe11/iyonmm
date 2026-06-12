@@ -4,7 +4,7 @@ import CompressPdfClient from "./CompressPdfClient";
 export const metadata: Metadata = {
   title: "Compress PDF Online Free, Reduce PDF Size Fast",
   description: "Compress PDF files without losing quality. 100% free, client-side processing, your files never leave your browser. No signup, no limits.",
-  alternates: { canonical: "https://www.iyonm.com/compress-pdf" },
+  alternates: { canonical: "https://iyonm.com/compress-pdf" },
 };
 
 const jsonLd = {
@@ -20,7 +20,7 @@ const jsonLd = {
         { "@type": "Question", name: "Is there a file size limit?", acceptedAnswer: { "@type": "Answer", text: "No size limit. Processing is only bound by your device memory." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "Compress PDF", item: "https://www.iyonm.com/compress-pdf" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "Compress PDF", item: "https://iyonm.com/compress-pdf" }] },
   ],
 };
 

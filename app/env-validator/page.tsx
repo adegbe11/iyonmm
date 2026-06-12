@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: ".env Validator, Check Env Files for Errors & Leaked Keys",
   description: "Validate your .env file for syntax errors, duplicate keys, and leaked secrets. 100% client-side, your secrets never leave your browser.",
-  alternates: { canonical: "https://www.iyonm.com/env-validator" },
+  alternates: { canonical: "https://iyonm.com/env-validator" },
 };
 
 const faqs = [
