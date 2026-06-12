@@ -71,6 +71,16 @@ const orgJsonLd = {
       url: SITE,
       description: "Free online PDF, image, and video tools that run entirely in your browser.",
       slogan: "It's Your Online No-upload Multitool",
+      logo: {
+        "@type": "ImageObject",
+        "@id": `${SITE}/#logo`,
+        url: `${SITE}/logo.png`,
+        contentUrl: `${SITE}/logo.png`,
+        width: 512,
+        height: 512,
+        caption: "IYONM",
+      },
+      image: { "@id": `${SITE}/#logo` },
     },
     {
       "@type": "WebSite",
