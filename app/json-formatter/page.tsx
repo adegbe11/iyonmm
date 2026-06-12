@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "JSON Formatter & Validator, Free Online",
   description: "Beautify, validate, and minify JSON instantly. Clear error messages, copy in one click. Free, private, runs in your browser.",
-  alternates: { canonical: "https://iyonm.com/json-formatter" },
+  alternates: { canonical: "https://www.iyonm.com/json-formatter" },
 };
 
 const faqs = [

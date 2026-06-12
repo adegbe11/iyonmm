@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ format: s
   return {
     title: `Compress ${f.name} Online Free, Reduce ${f.name} File Size`,
     description: `Compress ${f.name} images for free in your browser. ${f.blurb} Nothing uploaded, no limits, no signup.`,
-    alternates: { canonical: `https://iyonm.com/compress/${format}` },
+    alternates: { canonical: `https://www.iyonm.com/compress/${format}` },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ format: strin
           { "@type": "Question", name: "Is it free?", acceptedAnswer: { "@type": "Answer", text: "Yes. Free, no limits, no signup." } },
         ],
       },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: `Compress ${f.name}`, item: `https://iyonm.com/compress/${format}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: `Compress ${f.name}`, item: `https://www.iyonm.com/compress/${format}` }] },
     ],
   };
 

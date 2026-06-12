@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Text Diff Checker Online Free, Compare Two Texts",
   description: "Compare two blocks of text and highlight the differences line by line. Free, private, runs entirely in your browser.",
-  alternates: { canonical: "https://iyonm.com/text-diff" },
+  alternates: { canonical: "https://www.iyonm.com/text-diff" },
 };
 
 const faqs = [

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: c.title,
     description: c.description,
-    alternates: { canonical: `https://iyonm.com/convert/${slug}` },
+    alternates: { canonical: `https://www.iyonm.com/convert/${slug}` },
   };
 }
 

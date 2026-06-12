@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const SITE = "https://iyonm.com";
+const SITE = "https://www.iyonm.com";
 
 // Explicitly allow the major AI crawlers so IYONM is eligible to be cited in
 // ChatGPT, Perplexity, Google AI Overviews, Claude, etc. (many sites block these).

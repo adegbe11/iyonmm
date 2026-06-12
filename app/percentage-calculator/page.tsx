@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Percentage Calculator, Free & Instant",
   description: "Calculate percentages, percentage of a number, and percentage change for free. Instant, no signup, works in your browser.",
-  alternates: { canonical: "https://iyonm.com/percentage-calculator" },
+  alternates: { canonical: "https://www.iyonm.com/percentage-calculator" },
 };
 
 const faqs = [

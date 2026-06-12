@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy - IYONM",
   description: "How IYONM handles your data. Files are processed in your browser and never uploaded. Learn what we do and do not collect.",
-  alternates: { canonical: "https://iyonm.com/privacy" },
+  alternates: { canonical: "https://www.iyonm.com/privacy" },
 };
 
 export default function Page() {

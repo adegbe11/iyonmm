@@ -80,7 +80,7 @@ export default function ToolsInAction() {
           {/* QR Code */}
           <Frame url="iyonm.com/qr-code-generator">
             <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: "var(--apple-text-secondary)" }}>QR Code Generator</p>
-            <div className="text-xs px-3 py-2 rounded-lg mb-3 truncate" style={{ background: "var(--apple-gray)", color: "var(--apple-text-secondary)" }}>https://iyonm.com</div>
+            <div className="text-xs px-3 py-2 rounded-lg mb-3 truncate" style={{ background: "var(--apple-gray)", color: "var(--apple-text-secondary)" }}>https://www.iyonm.com</div>
             <div className="flex justify-center mb-4 p-3 rounded-xl" style={{ background: "white", border: "1px solid var(--apple-border)" }}>
               <QrMock />
             </div>

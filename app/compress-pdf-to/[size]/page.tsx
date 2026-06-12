@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ size: str
   return {
     title: `Compress PDF to ${t.label} Online Free`,
     description: `Compress a PDF to ${t.label} or under so it fits email and upload limits. Free, nothing uploaded, runs in your browser.`,
-    alternates: { canonical: `https://iyonm.com/compress-pdf-to/${size}` },
+    alternates: { canonical: `https://www.iyonm.com/compress-pdf-to/${size}` },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ size: string 
           { "@type": "Question", name: "Will the text still be selectable?", acceptedAnswer: { "@type": "Answer", text: "To hit a small exact size, pages are rerendered as images, so text becomes part of the image. For email and upload limits this is usually fine." } },
         ],
       },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: `Compress PDF to ${t.label}`, item: `https://iyonm.com/compress-pdf-to/${size}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: `Compress PDF to ${t.label}`, item: `https://www.iyonm.com/compress-pdf-to/${size}` }] },
     ],
   };
 

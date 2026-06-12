@@ -4,7 +4,7 @@ import LegalAuditorClient from "./LegalAuditorClient";
 export const metadata: Metadata = {
   title: "Contract Risk Scanner, Find Risky Clauses Free (No Upload)",
   description: "Scan a contract or policy for predatory clauses, missing protections, and GDPR / HIPAA gaps. Runs entirely in your browser, nothing uploaded, no signup.",
-  alternates: { canonical: "https://iyonm.com/ai-legal-auditor" },
+  alternates: { canonical: "https://www.iyonm.com/ai-legal-auditor" },
 };
 
 const jsonLd = {
@@ -19,7 +19,7 @@ const jsonLd = {
         { "@type": "Question", name: "How is my document handled?", acceptedAnswer: { "@type": "Answer", text: "The entire scan runs in your browser. Your document never leaves your device, and no AI service or API key is involved." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "Contract Risk Scanner", item: "https://iyonm.com/ai-legal-auditor" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "Contract Risk Scanner", item: "https://www.iyonm.com/ai-legal-auditor" }] },
   ],
 };
 

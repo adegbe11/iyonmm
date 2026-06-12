@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const SITE = "https://iyonm.com";
+const SITE = "https://www.iyonm.com";
 const URL = `${SITE}/blog/ilovepdf-vs-iyonm`;
 
 export const metadata: Metadata = {

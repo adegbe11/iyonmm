@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "URL Encode and Decode Online Free",
   description: "Percent-encode text for URLs or decode encoded URLs back to text. Free, private, runs entirely in your browser.",
-  alternates: { canonical: "https://iyonm.com/url-encoder" },
+  alternates: { canonical: "https://www.iyonm.com/url-encoder" },
 };
 
 const faqs = [

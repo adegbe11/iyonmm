@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "QR Code Generator, Free & No Signup",
   description: "Create a QR code for any link, text, email, or phone number. Free, instant, no signup. Download as PNG. Runs entirely in your browser.",
-  alternates: { canonical: "https://iyonm.com/qr-code-generator" },
+  alternates: { canonical: "https://www.iyonm.com/qr-code-generator" },
 };
 
 const faqs = [

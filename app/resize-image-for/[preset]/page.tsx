@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ preset: s
   return {
     title: `Resize Image for ${p.name} (${p.width} x ${p.height}) Free`,
     description: `Resize any photo to ${p.width} x ${p.height} pixels for ${p.name}. Free, instant, nothing uploaded. ${p.note}`,
-    alternates: { canonical: `https://iyonm.com/resize-image-for/${preset}` },
+    alternates: { canonical: `https://www.iyonm.com/resize-image-for/${preset}` },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ preset: strin
           { "@type": "Question", name: "Will my image be stretched?", acceptedAnswer: { "@type": "Answer", text: p.mode === "cover" ? "No. The image is scaled to fill and centered, then cropped to fit exactly, so it never looks stretched." : "No. The image is scaled to fit fully inside the dimensions with no distortion." } },
         ],
       },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: `Resize for ${p.name}`, item: `https://iyonm.com/resize-image-for/${preset}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: `Resize for ${p.name}`, item: `https://www.iyonm.com/resize-image-for/${preset}` }] },
     ],
   };
 

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   return {
     title: `${p.country} Passport Photo Size Online Free`,
     description: `Make a ${p.country} passport photo at the official size (${p.physical}). Free, nothing uploaded, runs in your browser. Crop and resize in one click.`,
-    alternates: { canonical: `https://iyonm.com/passport-photo/${country}` },
+    alternates: { canonical: `https://www.iyonm.com/passport-photo/${country}` },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ country: stri
           { "@type": "Question", name: "Is this an official photo service?", acceptedAnswer: { "@type": "Answer", text: "No. This tool resizes and crops your photo to the official dimensions. Always check current government requirements before submitting." } },
         ],
       },
-      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: `${p.country} Passport Photo`, item: `https://iyonm.com/passport-photo/${country}` }] },
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: `${p.country} Passport Photo`, item: `https://www.iyonm.com/passport-photo/${country}` }] },
     ],
   };
 

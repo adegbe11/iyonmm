@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Calculator Online, Free Full-Screen Calculator",
   description: "A free online calculator that works with your keyboard. No signup, no clutter. Add, subtract, multiply, divide, and percentages instantly.",
-  alternates: { canonical: "https://iyonm.com/calculator" },
+  alternates: { canonical: "https://www.iyonm.com/calculator" },
 };
 
 const faqs = [

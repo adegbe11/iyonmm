@@ -3,7 +3,7 @@ import { converters } from "@/lib/converters";
 import { compressTargets, resizePresets, compressPdfTargets, compressFormats, passportSpecs, guides } from "@/lib/seo-data";
 import { securePages } from "@/lib/secure-data";
 
-const BASE = "https://iyonm.com";
+const BASE = "https://www.iyonm.com";
 
 const staticPages = [
   { path: "", priority: 1.0 },

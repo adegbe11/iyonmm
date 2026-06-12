@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Loan Calculator, Monthly Payment & Interest (Free)",
   description: "Calculate monthly payments and total interest for a mortgage, car loan, or personal loan. Free, instant, private.",
-  alternates: { canonical: "https://iyonm.com/loan-calculator" },
+  alternates: { canonical: "https://www.iyonm.com/loan-calculator" },
 };
 
 const faqs = [

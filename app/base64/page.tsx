@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Base64 Encode and Decode Online Free",
   description: "Encode text to Base64 or decode Base64 to text instantly. Free, private, runs entirely in your browser. Handles full Unicode.",
-  alternates: { canonical: "https://iyonm.com/base64" },
+  alternates: { canonical: "https://www.iyonm.com/base64" },
 };
 
 const faqs = [

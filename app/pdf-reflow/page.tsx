@@ -4,7 +4,7 @@ import PdfReflowClient from "./PdfReflowClient";
 export const metadata: Metadata = {
   title: "Make a PDF Readable on Mobile, Free PDF Reflow Tool",
   description: "Reflow any multi-column PDF into a clean, single-column reading view that fits your phone. No more pinch and zoom. Free, nothing uploaded, runs in your browser.",
-  alternates: { canonical: "https://iyonm.com/pdf-reflow" },
+  alternates: { canonical: "https://www.iyonm.com/pdf-reflow" },
 };
 
 const jsonLd = {
@@ -20,7 +20,7 @@ const jsonLd = {
         { "@type": "Question", name: "Can I save the reflowed version?", acceptedAnswer: { "@type": "Answer", text: "Yes. You can download the clean reading view as an HTML file that opens in any browser." } },
       ],
     },
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://iyonm.com" }, { "@type": "ListItem", position: 2, name: "PDF Reflow", item: "https://iyonm.com/pdf-reflow" }] },
+    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://www.iyonm.com" }, { "@type": "ListItem", position: 2, name: "PDF Reflow", item: "https://www.iyonm.com/pdf-reflow" }] },
   ],
 };
 

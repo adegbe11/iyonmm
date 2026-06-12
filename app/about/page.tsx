@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About IYONM - Free, Private, In-Browser Tools",
   description: "IYONM is It's Your Online No-upload Multitool: free PDF, image, video, and developer tools that run entirely in your browser. Nothing uploaded.",
-  alternates: { canonical: "https://iyonm.com/about" },
+  alternates: { canonical: "https://www.iyonm.com/about" },
 };
 
 export default function Page() {
