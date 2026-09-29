@@ -1,0 +1,32 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const Module = require('node:module');
+const ts = require('typescript');
+const filename = path.resolve(__dirname, '../lib/document-renamer.ts');
+const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+const mod = new Module(filename, module); mod.filename=filename; mod.paths=module.paths; mod._compile(compiled,filename);
+const {suggestFields,safeName,formatName,uniqueNames,createZip}=mod.exports;
+async function test() {
+  assert.deepEqual(suggestFields('Vendor: Acme\nInvoice #1042\n2026-09-29\nTotal: $1,240.00'),{date:'2026-09-29',vendor:'Acme',invoice:'1042',amount:'1240.00'});
+  assert.equal(suggestFields('2026-02-31').date,'');
+  assert.equal(suggestFields('Invoice due tomorrow').invoice,'');
+  assert.equal(suggestFields('September 29, 2026').date,'2026-09-29');
+  assert.equal(suggestFields('03/04/2026').date,'');
+  assert.equal(safeName('../bad:name.pdf'),'badname.pdf');
+  assert.equal(safeName('CON.pdf'),'_CON.pdf');
+  assert.deepEqual(uniqueNames(['Acme.pdf','acme.pdf','Acme_2.pdf']),['Acme.pdf','acme_2.pdf','Acme_2_2.pdf']);
+  assert.equal(formatName('{date}_{vendor}_{index}',{date:'',vendor:'Acme',invoice:'',amount:''},'scan.pdf',0),'Unknown_date_Acme_001.pdf');
+  const input = new TextEncoder().encode('%PDF-1.7\nOriginal contents');
+  const blob=await createZip([{name:'Résumé.pdf',file:new File([input],'scan.pdf')}]);
+  const bytes=new Uint8Array(await blob.arrayBuffer()); const view=new DataView(bytes.buffer);
+  assert.equal(view.getUint32(0,true),0x04034b50);
+  const nameLength=view.getUint16(26,true);
+  assert.equal(new TextDecoder().decode(bytes.slice(30,30+nameLength)),'Résumé.pdf');
+  assert.deepEqual(bytes.slice(30+nameLength,30+nameLength+input.length),input);
+  assert.equal(view.getUint32(bytes.length-22,true),0x06054b50);
+  assert.equal(view.getUint16(bytes.length-14,true),1);
+  assert.equal(view.getUint32(view.getUint32(bytes.length-6,true),true),0x02014b50);
+  console.log('PASS: suggestions, ambiguous dates, filename safety, duplicate handling, ZIP structure, Unicode names, unchanged PDF bytes.');
+}
+test().catch(error=>{console.error(error);process.exitCode=1;});

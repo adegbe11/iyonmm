@@ -1,0 +1,27 @@
+const {chromium}=require('@playwright/test');
+const {PDFDocument,StandardFonts}=require('pdf-lib');
+const assert=require('node:assert/strict');
+async function main(){
+ const doc=await PDFDocument.create();const font=await doc.embedFont(StandardFonts.Helvetica);
+ doc.addPage([300,400]).drawText('Private invoice 1042',{font,x:20,y:350});doc.addPage([300,400]).drawText('Second page',{font,x:20,y:350});
+ const fixture={name:'test.pdf',mimeType:'application/pdf',buffer:Buffer.from(await doc.save())};
+ const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+ const context=await browser.newContext({acceptDownloads:true});const results=[];
+ async function test(route,fn){const p=await context.newPage();p.setDefaultTimeout(45000);p.on('dialog',d=>d.dismiss());try{await p.goto('http://localhost:3000'+route);await p.waitForTimeout(600);await fn(p);console.log('PASS',route);results.push({route,pass:true});}catch(e){console.log('FAIL',route,e.message.slice(0,400));results.push({route,pass:false,error:e.message});}finally{await p.close();}}
+ async function download(p,locator){await locator.waitFor({state:'visible'});const [f]=await Promise.all([p.waitForEvent('download'),locator.click()]);const chunks=[];for await(const c of await f.createReadStream())chunks.push(c);return Buffer.concat(chunks);}
+ async function load(p){await p.locator('input[type=file]').setInputFiles(fixture);}
+ async function pdfOut(p,count=2){const b=await download(p,p.locator('a[download]').first());const d=await PDFDocument.load(b);assert.equal(d.getPageCount(),count);return d;}
+ await test('/split-pdf',async p=>{await load(p);await p.getByRole('button',{name:'Split PDF',exact:true}).click();await pdfOut(p,1);assert.equal(await p.locator('a[download]').count(),2);});
+ await test('/extract-pages',async p=>{await load(p);await p.getByRole('button',{name:'Extract page range',exact:true}).click();await p.getByPlaceholder('e.g. 1-3, 5, 7-9').fill('2');await p.getByRole('button',{name:'Split PDF',exact:true}).click();await pdfOut(p,1);});
+ await test('/remove-pages',async p=>{await load(p);await p.getByRole('button',{name:'1',exact:true}).click();await p.getByRole('button',{name:'Remove 1 page',exact:true}).click();await pdfOut(p,1);});
+ await test('/watermark-pdf',async p=>{await load(p);await p.getByRole('button',{name:'Add Watermark',exact:true}).click();await pdfOut(p);});
+ await test('/organize-pdf',async p=>{await load(p);await p.getByRole('button',{name:'⟳',exact:true}).first().click();await p.getByRole('button',{name:'Apply & Save',exact:true}).click();assert.equal((await pdfOut(p)).getPage(0).getRotation().angle,90);});
+ await test('/crop-pdf',async p=>{await load(p);await p.getByRole('button',{name:'Crop PDF',exact:true}).click();await pdfOut(p);});
+ await test('/edit-pdf',async p=>{await load(p);await p.getByPlaceholder('Text to add').fill('Added text');await p.getByAltText('Page 1',{exact:true}).click({position:{x:100,y:100}});await p.getByRole('button',{name:'Apply & Save',exact:true}).click();await pdfOut(p);});
+ await test('/sign-pdf',async p=>{await load(p);await p.getByRole('button',{name:'Type',exact:true}).click();await p.getByPlaceholder('Your name').fill('Test Signature');await p.getByRole('button',{name:'Use signature',exact:true}).click();await p.getByAltText('Page 1',{exact:true}).click({position:{x:100,y:100}});await p.getByRole('button',{name:'Sign PDF',exact:true}).click();await pdfOut(p);});
+ await test('/redact-pdf',async p=>{await load(p);const img=p.getByAltText('Page 1',{exact:true});await img.waitFor();const b=await img.boundingBox();await p.mouse.move(b.x+10,b.y+10);await p.mouse.down();await p.mouse.move(b.x+b.width/2,b.y+b.height/4);await p.mouse.up();await p.getByRole('button',{name:'Clear page',exact:true}).waitFor();await p.getByRole('button',{name:'Apply redactions',exact:true}).click();const d=await pdfOut(p);assert.equal(d.getPage(0).getWidth(),300);assert.equal(d.getPage(0).getHeight(),400);});
+ await test('/pdf-to-form',async p=>{const d=await PDFDocument.create();const pg=d.addPage();const f=d.getForm().createTextField('full_name');f.addToPage(pg,{x:20,y:300,width:200,height:40});await p.locator('input[type=file]').setInputFiles({...fixture,buffer:Buffer.from(await d.save())});await p.locator('main input:not([type=file])').fill('Test User');await p.getByRole('button',{name:'Fill PDF',exact:true}).click();const out=await pdfOut(p,1);assert.equal(out.getForm().getTextField('full_name').getText(),'Test User');});
+ for(const [route,button]of [['/pdf-to-markdown','Download .md'],['/pdf-reflow','Download HTML']])await test(route,async p=>{await load(p);assert.ok((await download(p,p.getByRole('button',{name:button,exact:true}))).toString().includes('1042'));});
+ await test('/word-to-pdf',async p=>{const {Document,Packer,Paragraph}=require('docx');const b=await Packer.toBuffer(new Document({sections:[{children:[new Paragraph('Test document')]}]}));await p.locator('input[type=file]').setInputFiles({name:'test.docx',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',buffer:b});const out=await pdfOut(p,1);assert.ok(out.getPageCount());});
+ await browser.close();console.log('SUMMARY',JSON.stringify(results));if(results.some(r=>!r.pass))process.exitCode=1;
+}main().catch(e=>{console.error(e);process.exitCode=1;});

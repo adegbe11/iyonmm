@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import WidgetShell from "@/components/WidgetShell";
+import { diffLines } from "@/lib/text-diff";
 
 type Row = { type: "same" | "add" | "del"; text: string };
 function diff(a: string[], b: string[]): Row[] {
@@ -19,7 +20,11 @@ export default function Client() {
   const [b, setB] = useState("");
   const [rows, setRows] = useState<Row[] | null>(null);
 
-  function run() { setRows(diff(a.split("\n"), b.split("\n"))); }
+  function run() {
+    setRows(null);
+    try { setRows(diffLines(a.split("\n"), b.split("\n"))); }
+    catch (error) { alert(error instanceof Error ? error.message : 'Comparison failed.'); }
+  }
 
   const faqs = [
     { q: "Is my text uploaded?", a: "No. The comparison runs entirely in your browser. Nothing is sent anywhere." },

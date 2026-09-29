@@ -25,9 +25,11 @@ export default function Client() {
       setStatus("Compressing...");
       const inName = "in." + (file.name.split(".").pop() || "mp4");
       await ff.writeFile(inName, await fetchFile(file));
-      await ff.exec(["-i", inName, "-vcodec", "libx264", "-crf", String(QUALITY[quality]), "-preset", "veryfast", "-acodec", "aac", "-b:a", "128k", "out.mp4"]);
+      const code = await ff.exec(["-y", "-i", inName, "-vcodec", "libx264", "-crf", String(QUALITY[quality]), "-preset", "veryfast", "-acodec", "aac", "-b:a", "128k", "out.mp4"]);
+      if(code!==0)throw new Error('Video encoding failed');
       const data = await ff.readFile("out.mp4");
       const blob = new Blob([(data as Uint8Array).buffer as ArrayBuffer], { type: "video/mp4" });
+      await ff.deleteFile(inName);await ff.deleteFile('out.mp4');
       setResult({ url: URL.createObjectURL(blob), size: blob.size, original: file.size, name: file.name });
       setStage("done");
     } catch (e) {

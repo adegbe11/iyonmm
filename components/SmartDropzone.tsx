@@ -39,7 +39,7 @@ const SUGGESTIONS: Record<Exclude<Cat, "unknown">, { label: string; href: string
 
 const CAT_LABEL: Record<Cat, string> = { pdf: "PDF", image: "Image", video: "Video", word: "Word document", excel: "Spreadsheet", unknown: "file" };
 
-export default function SmartDropzone() {
+export default function SmartDropzone({ compact = false }: { compact?: boolean }) {
   const router = useRouter();
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -56,26 +56,32 @@ export default function SmartDropzone() {
   const tools = cat !== "unknown" ? SUGGESTIONS[cat] : [];
 
   return (
-    <div className="max-w-2xl mx-auto mb-6">
+    <div className={compact ? "compact-dropzone max-w-xl mx-auto" : "max-w-2xl mx-auto mb-6"}>
       {!file ? (
         <div
           onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
           onDragLeave={() => setDragging(false)}
+          data-dragging={dragging}
           onDrop={onDrop}
           onClick={() => inputRef.current?.click()}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inputRef.current?.click(); } }}
+          aria-label="Choose a PDF, image, or video to find a tool"
           className="rounded-3xl cursor-pointer transition-all text-center px-6 py-10"
           style={{
-            border: `2px dashed ${dragging ? "var(--apple-blue)" : "rgba(103,61,230,0.35)"}`,
+            border: compact ? `1px solid ${dragging ? "var(--apple-blue)" : "rgba(29,29,31,0.09)"}` : `2px dashed ${dragging ? "var(--apple-blue)" : "rgba(103,61,230,0.35)"}`,
             background: dragging ? "#EDE7FB" : "rgba(255,255,255,0.7)",
             backdropFilter: "blur(8px)",
           }}
         >
           <input ref={inputRef} type="file" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-3" style={{ background: "var(--apple-blue)" }}>
+          {!compact && <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-3" style={{ background: "var(--apple-blue)" }}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 16V4M6 10l6-6 6 6" /><path d="M4 20h16" /></svg>
-          </div>
-          <p className="font-semibold text-lg" style={{ color: "var(--apple-black)" }}>Drop any PDF, image, or video here</p>
-          <p className="text-sm mt-1" style={{ color: "var(--apple-text-secondary)" }}>We detect the file and show you the right tool. Nothing is uploaded.</p>
+          </div>}
+          <p className="font-semibold text-lg" style={{ color: compact ? "white" : "var(--apple-black)" }}>{compact ? "Choose a file" : "Drop any PDF, image, or video here"}</p>
+          {compact && <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>}
+          {!compact && <p className="text-sm mt-1" style={{ color: "var(--apple-text-secondary)" }}>We detect the file and show you the right tool. Nothing is uploaded.</p>}
         </div>
       ) : (
         <div className="rounded-3xl p-6 text-left" style={{ border: "1px solid var(--apple-border)", background: "white", boxShadow: "0 10px 30px rgba(0,0,0,0.08)" }}>
@@ -97,10 +103,11 @@ export default function SmartDropzone() {
               ))}
             </div>
           ) : (
-            <p className="text-sm" style={{ color: "var(--apple-text-secondary)" }}>We could not match that file type. Try the search below to find a tool.</p>
+            <p className="text-sm" style={{ color: "var(--apple-text-secondary)" }}>We could not match that file type. Try searching for a tool.</p>
           )}
         </div>
       )}
+      {compact && !file && <p className="smart-drop-hint">or drop it here</p>}
     </div>
   );
 }

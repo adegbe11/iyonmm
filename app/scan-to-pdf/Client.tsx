@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ToolShell from "@/components/ToolShell";
 import DropZone from "@/components/DropZone";
 
@@ -10,22 +10,30 @@ export default function Client() {
   const [busy, setBusy] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  useEffect(() => () => { streamRef.current?.getTracks().forEach(track => track.stop()); }, []);
+  useEffect(() => {
+    if (camOn && videoRef.current && streamRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+      void videoRef.current.play().catch(() => {});
+    }
+  }, [camOn]);
 
   async function startCam() {
     try {
       const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
       streamRef.current = s; setCamOn(true);
-      setTimeout(() => { if (videoRef.current) { videoRef.current.srcObject = s; videoRef.current.play(); } }, 50);
     } catch { alert("Could not access the camera. You can upload images instead."); }
   }
   function stopCam() { streamRef.current?.getTracks().forEach((t) => t.stop()); setCamOn(false); }
   function capture() {
-    const v = videoRef.current!; const c = document.createElement("canvas");
+    const v = videoRef.current;
+    if (!v || !v.videoWidth || !v.videoHeight) return;
+    const c = document.createElement("canvas");
     c.width = v.videoWidth; c.height = v.videoHeight; c.getContext("2d")!.drawImage(v, 0, 0);
     setShots((s) => [...s, c.toDataURL("image/jpeg", 0.9)]); setResultUrl(null);
   }
   async function addFiles(files: File[]) {
-    const urls = await Promise.all(files.map((f) => new Promise<string>((res) => { const r = new FileReader(); r.onload = () => res(r.result as string); r.readAsDataURL(f); })));
+    const urls = await Promise.all(files.map((f) => new Promise<string>((res, reject) => { const r = new FileReader(); r.onload = () => res(r.result as string); r.onerror = () => reject(new Error('Could not read this image.')); r.readAsDataURL(f); })));
     setShots((s) => [...s, ...urls]); setResultUrl(null);
   }
   function remove(i: number) { setShots((s) => s.filter((_, k) => k !== i)); setResultUrl(null); }

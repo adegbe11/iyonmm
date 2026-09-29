@@ -23,6 +23,7 @@ export default function PdfToWordClient() {
 
       const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
       const paragraphs: InstanceType<typeof Paragraph>[] = [];
+      let hasText = false;
 
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
@@ -34,6 +35,7 @@ export default function PdfToWordClient() {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const it = item as any;
           if (!("str" in it)) continue;
+          if (it.str.trim()) hasText = true;
           const y = it.transform[5];
           if (lastY !== null && Math.abs(y - lastY) > 2) {
             paragraphs.push(new Paragraph({ children: [new TextRun(line.trim())] }));
@@ -47,6 +49,7 @@ export default function PdfToWordClient() {
         setProgress(Math.round((i / pdf.numPages) * 100));
       }
 
+      if (!hasText) throw new Error('No extractable text found.');
       const doc = new Document({ sections: [{ children: paragraphs }] });
       const blob = await Packer.toBlob(doc);
       setResultUrl(URL.createObjectURL(blob));

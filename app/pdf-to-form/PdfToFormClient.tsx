@@ -24,6 +24,7 @@ export default function PdfToFormClient() {
     if (!file) return;
     setError("");
     setResultUrl(null);
+    setFields([]);setBytes(null);
     setLoading(true);
     try {
       const buf = await file.arrayBuffer();

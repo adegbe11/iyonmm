@@ -3,7 +3,7 @@ import ProtectPdfClient from "./ProtectPdfClient";
 
 export const metadata: Metadata = {
   title: "Protect PDF with Password Online Free",
-  description: "Add password protection to any PDF file. Free, client-side, your files are never uploaded. Set open password and permission restrictions.",
+  description: "Encrypt PDFs with AES-256 password protection locally in your browser. Free, no file uploads. Save a protected copy without changing your original.",
   alternates: { canonical: "https://www.iyonm.com/protect-pdf" },
 };
 

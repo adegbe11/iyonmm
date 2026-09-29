@@ -41,11 +41,11 @@ export default function Client() {
     setPageImg(c.toDataURL("image/jpeg", 0.8));
   }
 
-  function rel(e: React.MouseEvent) { const r = imgRef.current!.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }; }
-  function down(e: React.MouseEvent) { drag.current = rel(e); }
-  function move(e: React.MouseEvent) { if (!drag.current) return; const p = rel(e); const s = drag.current; setDraftRect({ x: Math.min(s.x, p.x), y: Math.min(s.y, p.y), w: Math.abs(p.x - s.x), h: Math.abs(p.y - s.y) }); }
+  function rel(e: React.PointerEvent) { const r = imgRef.current!.getBoundingClientRect(); return { x: Math.max(0,Math.min(1,(e.clientX - r.left) / r.width)), y: Math.max(0,Math.min(1,(e.clientY - r.top) / r.height)) }; }
+  function down(e: React.PointerEvent) { if(busy)return;e.currentTarget.setPointerCapture(e.pointerId);drag.current = rel(e); }
+  function move(e: React.PointerEvent) { if (!drag.current) return; const p = rel(e); const s = drag.current; setDraftRect({ x: Math.min(s.x, p.x), y: Math.min(s.y, p.y), w: Math.abs(p.x - s.x), h: Math.abs(p.y - s.y) }); }
   function upE() { if (drag.current && draftRect && draftRect.w > 0.005 && draftRect.h > 0.005) { setRects((m) => ({ ...m, [idx]: [...(m[idx] || []), draftRect] })); } drag.current = null; setDraftRect(null); setResultUrl(null); }
-  function clearPage() { setRects((m) => ({ ...m, [idx]: [] })); }
+  function clearPage() { setRects((m) => ({ ...m, [idx]: [] }));setResultUrl(null); }
 
   async function goto(n: number) { if (!bytes) return; setIdx(n); await render(bytes, n); }
 
@@ -66,8 +66,10 @@ export default function Client() {
         await page.render({ canvasContext: ctx as any, viewport: vp, canvas: c } as any).promise;
         ctx.fillStyle = "#000";
         (rects[i] || []).forEach((r) => ctx.fillRect(r.x * c.width, r.y * c.height, r.w * c.width, r.h * c.height));
-        const img = await out.embedJpg(c.toDataURL("image/jpeg", 0.85));
-        const p = out.addPage([c.width, c.height]); p.drawImage(img, { x: 0, y: 0, width: c.width, height: c.height });
+        const img = await out.embedPng(c.toDataURL("image/png"));
+        const dimensions=page.getViewport({scale:1});
+        const p = out.addPage([dimensions.width, dimensions.height]); p.drawImage(img, { x: 0, y: 0, width: dimensions.width, height: dimensions.height });
+        c.width=0;c.height=0;
       }
       const data = await out.save();
       setResultUrl(URL.createObjectURL(new Blob([data.buffer as ArrayBuffer], { type: "application/pdf" })));
@@ -94,7 +96,7 @@ export default function Client() {
                 {cur.length > 0 && <button onClick={clearPage} className="ml-2 text-xs" style={{ color: "#FF3B30" }}>Clear page</button>}
               </div>
             </div>
-            <div className="relative inline-block w-full select-none" onMouseDown={down} onMouseMove={move} onMouseUp={upE} onMouseLeave={upE}>
+            <div className="relative inline-block w-full select-none" style={{touchAction:'none'}} onPointerDown={down} onPointerMove={move} onPointerUp={upE} onPointerCancel={upE}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               {pageImg && <img ref={imgRef} src={pageImg} alt={`Page ${idx + 1}`} draggable={false} className="w-full rounded-lg cursor-crosshair" style={{ border: "1px solid var(--apple-border)" }} />}
               {cur.map((r, k) => <div key={k} className="absolute" style={{ left: `${r.x * 100}%`, top: `${r.y * 100}%`, width: `${r.w * 100}%`, height: `${r.h * 100}%`, background: "#000" }} />)}

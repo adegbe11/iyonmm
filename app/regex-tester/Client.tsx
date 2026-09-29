@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import WidgetShell from "@/components/WidgetShell";
 
 export const faqs = [
@@ -13,25 +13,16 @@ export default function Client() {
   const [flags, setFlags] = useState("g");
   const [text, setText] = useState("Contact us at hello@iyonm.com or support@example.org.");
 
-  const { error, matches, html } = useMemo(() => {
-    if (!pattern) return { error: "", matches: [], html: text };
-    try {
-      const re = new RegExp(pattern, flags.includes("g") ? flags : flags + "g");
-      const found: { match: string; groups: string[] }[] = [];
-      let html = ""; let last = 0; let m;
-      const reExec = new RegExp(pattern, flags.includes("g") ? flags : flags + "g");
-      while ((m = reExec.exec(text)) !== null) {
-        found.push({ match: m[0], groups: m.slice(1) });
-        html += esc(text.slice(last, m.index)) + `<mark style="background:#FFE9A8;border-radius:3px">${esc(m[0]) || "∅"}</mark>`;
-        last = m.index + m[0].length;
-        if (m[0] === "") reExec.lastIndex++;
-      }
-      html += esc(text.slice(last));
-      return { error: "", matches: found, html };
-    } catch (e) {
-      return { error: e instanceof Error ? e.message : "Invalid regex", matches: [], html: esc(text) };
-    }
-  }, [pattern, flags, text]);
+  const [{error,matches,html},setOutput]=useState<{error:string;matches:{match:string;groups:string[]}[];html:string}>({error:'',matches:[],html:''});
+  useEffect(()=>{
+    const worker=new Worker('/regex.worker.js');
+    setOutput({error:'',matches:[],html:esc(text)});
+    const timeout=setTimeout(()=>{worker.terminate();setOutput({error:'This pattern took too long. Simplify it or use shorter text.',matches:[],html:esc(text)});},1000);
+    worker.onmessage=event=>{clearTimeout(timeout);setOutput(event.data);worker.terminate();};
+    worker.onerror=()=>{clearTimeout(timeout);setOutput({error:'The regex worker could not start. Reload the page.',matches:[],html:esc(text)});worker.terminate();};
+    worker.postMessage({pattern,flags,text});
+    return()=>{clearTimeout(timeout);worker.terminate();};
+  },[pattern,flags,text]);
 
   return (
     <WidgetShell title="Regex Tester" subtitle="Write and test JavaScript regular expressions with live match highlighting and capture groups. Free and private." badge="Instant" faqs={faqs}

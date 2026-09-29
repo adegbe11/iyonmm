@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { tools } from "@/lib/tools";
 import ToolIcon from "@/components/ToolIcon";
 import Logo from "@/components/Logo";
+import "./navbar.css";
 
 interface Item { label: string; href: string; icon: string }
 interface Section { title: string; color: string; items: Item[] }
@@ -92,7 +93,7 @@ function Column({ sec, close }: { sec: Section; close: () => void }) {
         {sec.items.map((it) => (
           <li key={it.href + it.label}>
             <Link href={it.href} onClick={close} className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-[#F5F5F7] transition-colors group">
-              <ToolIcon icon={it.icon} color={sec.color} size={26} />
+              <ToolIcon icon={tools.find((t) => t.href === it.href)?.icon ?? it.icon} color={sec.color} size={26} />
               <span className="text-sm group-hover:text-[#673DE6] transition-colors whitespace-nowrap" style={{ color: "var(--apple-black)" }}>{it.label}</span>
             </Link>
           </li>
@@ -122,41 +123,37 @@ export default function Navbar() {
   const close = () => { setOpen(""); setQuery(""); };
 
   return (
-    <header style={{ borderBottom: "1px solid var(--apple-border)", background: "rgba(255,255,255,0.85)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", position: "sticky", top: 0, zIndex: 50 }}
+    <header className="site-header" style={{ borderBottom: "1px solid var(--apple-border)", background: "rgba(255,255,255,0.85)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", position: "sticky", top: 0, zIndex: 50 }}
       onMouseLeave={() => setOpen("")}>
-      <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
+      <nav aria-label="Main navigation" className="header-nav max-w-6xl mx-auto px-4 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center flex-shrink-0" onClick={close} aria-label="IYONM home">
-          <Logo size={22} />
+          <Logo size={28} />
         </Link>
 
-        <div className="hidden md:flex items-center gap-1 flex-1">
+        <div className="hidden lg:flex items-center gap-1 flex-1">
           <Link href="/merge-pdf" onClick={close} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7]" style={{ color: "var(--apple-black)" }}>Merge PDF</Link>
           <Link href="/split-pdf" onClick={close} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7]" style={{ color: "var(--apple-black)" }}>Split PDF</Link>
           <Link href="/compress-pdf" onClick={close} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7]" style={{ color: "var(--apple-black)" }}>Compress PDF</Link>
-          <button onMouseEnter={() => setOpen("convert")} onClick={() => setOpen(open === "convert" ? "" : "convert")} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7] flex items-center gap-1" style={{ color: open === "convert" ? "var(--apple-blue)" : "var(--apple-black)" }}>
+          <button aria-expanded={open === "convert"} aria-controls="convert-tools-menu" onClick={() => setOpen(open === "convert" ? "" : "convert")} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7] flex items-center gap-1" style={{ color: open === "convert" ? "var(--apple-blue)" : "var(--apple-black)" }}>
             Convert <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" style={{ transform: open === "convert" ? "rotate(180deg)" : "none", transition: "transform .2s" }}><path d="M6 8L2 4h8z" /></svg>
           </button>
-          <button onMouseEnter={() => setOpen("all")} onClick={() => setOpen(open === "all" ? "" : "all")} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7] flex items-center gap-1" style={{ color: open === "all" ? "var(--apple-blue)" : "var(--apple-black)" }}>
+          <button aria-expanded={open === "all"} aria-controls="all-tools-menu" onClick={() => setOpen(open === "all" ? "" : "all")} className="px-3 py-2 text-sm font-medium rounded-lg hover:bg-[#F5F5F7] flex items-center gap-1" style={{ color: open === "all" ? "var(--apple-blue)" : "var(--apple-black)" }}>
             All Tools <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" style={{ transform: open === "all" ? "rotate(180deg)" : "none", transition: "transform .2s" }}><path d="M6 8L2 4h8z" /></svg>
           </button>
         </div>
 
-        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: "#EDE7FB", color: "var(--apple-blue)" }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
-            Nothing uploaded
-          </span>
-          <Link href="/compress-pdf" onClick={close} className="btn-primary text-sm" style={{ padding: "8px 18px" }}>Get started</Link>
+        <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+          <Link href="/#tools" onClick={close} className="header-cta text-sm">Explore tools <span aria-hidden="true">↗</span></Link>
         </div>
 
-        <button className="md:hidden p-2 -mr-2" onClick={() => setMobile((v) => !v)} aria-label="Menu">
+        <button className="header-menu-toggle lg:hidden p-2 -mr-2" onClick={() => setMobile((v) => !v)} aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={mobile} aria-controls="mobile-tools-menu">
           <svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor">{mobile ? <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /> : <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />}</svg>
         </button>
       </nav>
 
       {/* Convert dropdown (focused, two columns like iLovePDF) */}
       {open === "convert" && (
-        <div className="hidden md:block absolute left-0 right-0 top-full">
+        <div id="convert-tools-menu" className="hidden lg:block absolute left-0 right-0 top-full">
           <div className="mx-auto max-w-6xl px-4 pb-4">
             <div className="rounded-2xl shadow-2xl p-6 grid grid-cols-2 gap-8 w-fit" style={{ background: "white", border: "1px solid var(--apple-border)" }}>
               {CONVERT.map((s) => <Column key={s.title} sec={s} close={close} />)}
@@ -167,14 +164,14 @@ export default function Navbar() {
 
       {/* All Tools mega (wide, well-arranged columns) */}
       {open === "all" && (
-        <div className="hidden md:block absolute left-0 right-0 top-full">
+        <div id="all-tools-menu" className="hidden lg:block absolute left-0 right-0 top-full">
           <div className="mx-auto max-w-7xl px-4 pb-4">
             <div className="rounded-2xl shadow-2xl overflow-hidden" style={{ background: "white", border: "1px solid var(--apple-border)" }}>
               <div className="p-4" style={{ borderBottom: "1px solid var(--apple-border)" }}>
                 <div className="relative max-w-md">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--apple-text-secondary)" strokeWidth="2" strokeLinecap="round" className="absolute left-3 top-1/2 -translate-y-1/2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
                   {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-                  <input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search all tools..." className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl outline-none focus:border-[#673DE6]" style={{ border: "1px solid var(--apple-border)", background: "var(--apple-gray)" }} />
+                  <input aria-label="Search all tools" autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search all tools..." className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl outline-none focus:border-[#673DE6]" style={{ border: "1px solid var(--apple-border)", background: "var(--apple-gray)" }} />
                 </div>
               </div>
               <div className="p-6 max-h-[72vh] overflow-y-auto">
@@ -208,9 +205,9 @@ export default function Navbar() {
 
       {/* Mobile */}
       {mobile && (
-        <div className="md:hidden" style={{ background: "white", borderTop: "1px solid var(--apple-border)", maxHeight: "calc(100vh - 56px)", overflowY: "auto" }}>
+        <div id="mobile-tools-menu" className="lg:hidden" style={{ background: "white", borderTop: "1px solid var(--apple-border)", maxHeight: "calc(100dvh - 64px)", overflowY: "auto" }}>
           <div className="p-4">
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search all tools..." className="w-full px-4 py-2.5 text-sm rounded-xl outline-none mb-4" style={{ border: "1px solid var(--apple-border)", background: "var(--apple-gray)" }} />
+            <input aria-label="Search all tools" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search all tools..." className="w-full px-4 py-2.5 text-sm rounded-xl outline-none mb-4" style={{ border: "1px solid var(--apple-border)", background: "var(--apple-gray)" }} />
             {filtered ? (
               <div className="grid grid-cols-1 gap-1">
                 {filtered.map((t) => (

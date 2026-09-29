@@ -15,7 +15,9 @@ async function convertImage(file: File, toMime: string, outputExt: string): Prom
   // Special HEIC handling
   if (file.type === "image/heic" || file.type === "image/heif" || file.name.toLowerCase().endsWith(".heic")) {
     const heic2any = (await import("heic2any")).default;
-    const blob = await heic2any({ blob: file, toType: toMime, quality: 0.92 }) as Blob;
+    const converted = await heic2any({ blob: file, toType: toMime === 'image/webp' ? 'image/png' : toMime, quality: 0.92 });
+    const blob = Array.isArray(converted) ? converted[0] : converted;
+    if (toMime === 'image/webp') return convertImage(new File([blob], file.name.replace(/\.[^.]+$/, '.png'), {type: 'image/png'}), toMime, outputExt);
     return { name: file.name.replace(/\.[^.]+$/, "") + "." + outputExt, url: URL.createObjectURL(blob), originalSize: file.size, convertedSize: blob.size };
   }
 
@@ -35,10 +37,11 @@ async function convertImage(file: File, toMime: string, outputExt: string): Prom
       URL.revokeObjectURL(src);
       canvas.toBlob((blob) => {
         if (!blob) { reject(new Error("Conversion failed")); return; }
+        if (blob.type !== toMime) { reject(new Error('Your browser cannot encode this output format. Try PNG or JPG.')); return; }
         resolve({ name: file.name.replace(/\.[^.]+$/, "") + "." + outputExt, url: URL.createObjectURL(blob), originalSize: file.size, convertedSize: blob.size });
       }, toMime, 0.92);
     };
-    img.onerror = reject;
+    img.onerror = () => { URL.revokeObjectURL(src); reject(new Error('Your browser could not decode this image.')); };
     img.src = src;
   });
 }
@@ -47,10 +50,12 @@ export default function ConverterClient({ config }: { config: ConvertConfig }) {
   const [results, setResults] = useState<Result[]>([]);
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [errors, setErrors] = useState<string[]>([]);
 
   async function handleFiles(files: File[]) {
     setProcessing(true);
     setResults([]);
+    setErrors([]);
     setProgress(0);
     const out: Result[] = [];
     for (let i = 0; i < files.length; i++) {
@@ -59,6 +64,7 @@ export default function ConverterClient({ config }: { config: ConvertConfig }) {
         out.push(r);
       } catch (e) {
         console.error("Failed to convert", files[i].name, e);
+        setErrors(current => [...current, `${files[i].name}: ${e instanceof Error ? e.message : 'Conversion failed.'}`]);
       }
       setProgress(Math.round(((i + 1) / files.length) * 100));
     }
@@ -78,7 +84,7 @@ export default function ConverterClient({ config }: { config: ConvertConfig }) {
   return (
     <ToolShell
       title={`${config.from} to ${config.to} Converter`}
-      subtitle={`Convert ${config.from} files to ${config.to} format instantly in your browser. Nothing uploaded, no limits.`}
+      subtitle={`Convert ${config.from} files to ${config.to} format in your browser. Nothing uploaded.`}
       badge="100% Client-side"
       steps={[
         { icon: "📁", title: `Upload ${config.from}`, desc: `Select one or more ${config.from} files from your device.` },
@@ -98,6 +104,7 @@ export default function ConverterClient({ config }: { config: ConvertConfig }) {
         { label: "Remove Background", href: "/remove-background" },
       ]}
     >
+      {errors.length > 0 && <div role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{errors.map((error, index) => <p key={index}>{error}</p>)}</div>}
       <div>
         {!processing && results.length === 0 && (
           <DropZone

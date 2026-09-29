@@ -19,6 +19,7 @@ export default function Client() {
 
   async function handleFile(files: File[]) {
     const file = files[0]; if (!file) return;
+    if(!Number.isFinite(width)||width<120||width>1080||!Number.isFinite(fps)||fps<5||fps>30){setError('Choose a width from 120 to 1080 and FPS from 5 to 30.');return;}
     setError(""); setStage("working"); setProgress(0); setStatus("Loading engine (first run downloads ~30MB)...");
     try {
       const { fetchFile } = await import("@ffmpeg/util");
@@ -28,10 +29,13 @@ export default function Client() {
       await ff.writeFile(inName, await fetchFile(file));
       // Two-pass with palette for high-quality GIF
       const vf = `fps=${fps},scale=${width}:-1:flags=lanczos`;
-      await ff.exec(["-ss", String(start), "-t", String(dur), "-i", inName, "-vf", `${vf},palettegen`, "palette.png"]);
-      await ff.exec(["-ss", String(start), "-t", String(dur), "-i", inName, "-i", "palette.png", "-lavfi", `${vf} [x]; [x][1:v] paletteuse`, "out.gif"]);
+      const paletteCode=await ff.exec(["-y", "-ss", String(start), "-t", String(dur), "-i", inName, "-vf", `${vf},palettegen`, "palette.png"]);
+      if(paletteCode!==0)throw new Error('Palette generation failed');
+      const outputCode=await ff.exec(["-y", "-ss", String(start), "-t", String(dur), "-i", inName, "-i", "palette.png", "-lavfi", `${vf} [x]; [x][1:v] paletteuse`, "out.gif"]);
+      if(outputCode!==0)throw new Error('GIF conversion failed');
       const data = await ff.readFile("out.gif");
       const blob = new Blob([(data as Uint8Array).buffer as ArrayBuffer], { type: "image/gif" });
+      await ff.deleteFile(inName);await ff.deleteFile('palette.png');await ff.deleteFile('out.gif');
       setResult({ url: URL.createObjectURL(blob), size: blob.size, name: file.name });
       setStage("done");
     } catch (e) {

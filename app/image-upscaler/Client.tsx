@@ -26,12 +26,13 @@ export default function Client() {
       const upscaler = new Upscaler({ model });
       setStatus(`Upscaling ${scale}x...`);
       const src = await fileToDataUrl(file);
-      const out = await upscaler.upscale(src, {
+      let out: string;
+      try {out = await upscaler.upscale(src, {
         output: "base64",
         patchSize: 64,
         padding: 4,
         progress: (p: number) => setProgress(Math.round(p * 100)),
-      });
+      });} finally {await upscaler.dispose();}
       setResultUrl(out);
       setStage("done");
     } catch (e) {

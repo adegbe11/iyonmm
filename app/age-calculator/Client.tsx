@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import WidgetShell from "@/components/WidgetShell";
+import {ageDifference} from '@/lib/age';
 
 export const faqs = [
   { q: "How is age calculated?", a: "We compute the exact difference between your birth date and today, broken into years, months, and days." },
@@ -25,7 +26,7 @@ export default function Client() {
 
   const from = new Date(dob); const to = new Date(asOf);
   const valid = !isNaN(from.getTime()) && !isNaN(to.getTime()) && to >= from;
-  const r = valid ? diff(from, to) : null;
+  const r = valid ? ageDifference(from, to) : null;
 
   return (
     <WidgetShell title="Age Calculator" subtitle="Find your exact age in years, months, and days, or the age between any two dates. Free and private." badge="Instant" faqs={faqs}

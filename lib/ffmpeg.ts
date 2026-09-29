@@ -4,6 +4,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let ffmpegPromise: Promise<any> | null = null;
+let progressHandler: ((event: {progress:number}) => void) | null = null;
 
 export function loadFFmpeg(onProgress?: (ratio: number) => void) {
   if (!ffmpegPromise) {
@@ -17,11 +18,13 @@ export function loadFFmpeg(onProgress?: (ratio: number) => void) {
         wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
       });
       return ff;
-    })();
+    })().catch((error) => { ffmpegPromise = null; throw error; });
   }
   return ffmpegPromise.then((ff) => {
     if (onProgress) {
-      ff.on("progress", ({ progress }: { progress: number }) => onProgress(Math.min(1, Math.max(0, progress))));
+      if (progressHandler) ff.off('progress', progressHandler);
+      progressHandler = ({ progress }: { progress: number }) => onProgress(Math.min(1, Math.max(0, progress)));
+      ff.on("progress", progressHandler);
     }
     return ff;
   });

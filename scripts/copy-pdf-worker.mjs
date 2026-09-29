@@ -9,6 +9,8 @@ const dest = "public/pdf.worker.min.mjs";
 try {
   if (!existsSync("public")) mkdirSync("public");
   copyFileSync(src, dest);
+  mkdirSync('public/qpdf', { recursive: true });
+  for (const name of ['qpdf.js', 'qpdf.wasm']) copyFileSync(`node_modules/@neslinesli93/qpdf-wasm/dist/${name}`, `public/qpdf/${name}`);
   console.log(`[copy-pdf-worker] copied ${src} -> ${dest}`);
 } catch (e) {
   console.error("[copy-pdf-worker] failed:", e.message);

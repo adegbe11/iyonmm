@@ -8,12 +8,14 @@
     "prebuild": "node scripts/copy-pdf-worker.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:tools": "node scripts/test-browser-tools.cjs && node scripts/test-browser-media.cjs && node scripts/test-browser-editing.cjs && node scripts/test-browser-utilities.cjs"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
     "@imgly/background-removal": "^1.7.0",
+    "@neslinesli93/qpdf-wasm": "^0.3.0",
     "@tensorflow/tfjs": "^4.22.0",
     "@upscalerjs/esrgan-slim": "^1.0.0",
     "browser-image-compression": "^2.0.2",
@@ -34,6 +36,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/qrcode": "^1.5.6",

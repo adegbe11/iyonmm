@@ -47,6 +47,7 @@ export default function ResizeImageClient() {
       const canvas = document.createElement("canvas");
       const targetW = mode === "pct" ? Math.round(origW * pct / 100) : width;
       const targetH = mode === "pct" ? Math.round(origH * pct / 100) : height;
+      if(!Number.isFinite(targetW)||!Number.isFinite(targetH)||targetW<1||targetH<1||targetW*targetH>25000000){alert('Choose positive dimensions up to 25 million pixels.');return;}
       canvas.width = targetW;
       canvas.height = targetH;
       const ctx = canvas.getContext("2d")!;
@@ -55,7 +56,8 @@ export default function ResizeImageClient() {
         if (!blob) return;
         const url = URL.createObjectURL(blob);
         setResultUrl(url);
-        setResultName(file.name.replace(/\.[^.]+$/, "") + `-${targetW}x${targetH}.jpg`);
+        const extension=blob.type==='image/png'?'png':blob.type==='image/webp'?'webp':'jpg';
+        setResultName(file.name.replace(/\.[^.]+$/, "") + `-${targetW}x${targetH}.${extension}`);
       }, file.type || "image/jpeg", 0.92);
     };
     img.src = URL.createObjectURL(file);

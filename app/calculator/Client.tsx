@@ -32,7 +32,8 @@ export default function Client() {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (/[0-9+\-*/.()%]/.test(e.key)) { setExpr((p) => p + e.key); }
+      if (e.target instanceof HTMLElement && (e.target.matches('input, textarea') || e.target.isContentEditable)) return;
+      if (/^[0-9+\-*/.()%]$/.test(e.key)) { e.preventDefault(); setExpr((p) => p + e.key); }
       else if (e.key === "Enter" || e.key === "=") { e.preventDefault(); evaluate(); }
       else if (e.key === "Backspace") setExpr((p) => p.slice(0, -1));
       else if (e.key === "Escape") { setExpr(""); setResult("0"); }

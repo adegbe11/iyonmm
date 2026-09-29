@@ -30,6 +30,7 @@ export default function PdfToExcelClient() {
         // Cluster text items into rows by y, then columns by x
         const items = content.items
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .filter((it: any) => typeof it.str === 'string' && Array.isArray(it.transform))
           .map((it: any) => ({ str: it.str, x: it.transform[4], y: it.transform[5] }))
           .filter((it) => it.str.trim());
 
@@ -48,6 +49,7 @@ export default function PdfToExcelClient() {
         setProgress(Math.round((i / pdf.numPages) * 100));
       }
 
+      if(!rows.some(row=>row.some(cell=>cell.trim())))throw new Error('No text found in this PDF.');
       const ws = XLSX.utils.aoa_to_sheet(rows);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Sheet1");

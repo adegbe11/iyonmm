@@ -5,9 +5,11 @@
 ## Key facts
 - Free: every tool is free with no paywall, no signup, no login.
 - Private: all processing happens client-side in the browser; files never leave the user's device.
-- No limits: no file-size caps, no daily task limits, no watermarks.
+- Limits: no daily task quota or watermarks. Individual tools may have browser-safety limits, and processing depends on device memory.
 
 ## PDF tools
+- [PDF to JSON](https://www.iyonm.com/pdf-to-json): Extract positioned text, inferred blocks, bookmarks, and form fields locally. Editable JSON preview. No OCR or table reconstruction; up to 50 MB and 100 pages.
+- [Batch Document Renamer](https://www.iyonm.com/batch-document-renamer): Local filename suggestions for invoices and receipts, optional English OCR, editable previews, and ZIP downloads. Checks the first five pages, up to 200 PDFs and 250 MB per batch. Not an AI tool.
 - [Merge PDF](https://www.iyonm.com/merge-pdf): Combine multiple PDFs into one.
 - [Split PDF](https://www.iyonm.com/split-pdf): Separate pages into independent PDFs.
 - [Compress PDF](https://www.iyonm.com/compress-pdf): Reduce PDF file size.

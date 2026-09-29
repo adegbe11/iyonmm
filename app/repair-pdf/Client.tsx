@@ -13,7 +13,7 @@ export default function Client() {
     setBusy(true); setError(""); setResult(null);
     try {
       const { PDFDocument } = await import("pdf-lib");
-      const doc = await PDFDocument.load(await f.arrayBuffer(), { ignoreEncryption: true, throwOnInvalidObject: false, updateMetadata: false });
+      const doc = await PDFDocument.load(await f.arrayBuffer(), { throwOnInvalidObject: false, updateMetadata: false });
       // Rebuild into a fresh document to drop broken objects.
       const out = await PDFDocument.create();
       const copied = await out.copyPages(doc, doc.getPageIndices());

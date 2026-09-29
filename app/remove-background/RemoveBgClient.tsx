@@ -56,14 +56,21 @@ export default function RemoveBgClient() {
       if (typeof removeBackground !== "function") throw new Error("Background removal module failed to load.");
       setProgress(30);
       setStatusMsg("Removing background...");
-      const blob: Blob = await removeBackground(file, {
+      const config = {
         device: pickDevice(),
         model: MODEL,
         output: { format: "image/png" },
         progress: (_key: string, current: number, total: number) => {
           if (total) setProgress(30 + Math.round((current / total) * 60));
         },
-      });
+      };
+      let blob: Blob;
+      try {blob=await removeBackground(file,config);}
+      catch(error) {
+        if(config.device!=='gpu')throw error;
+        setStatusMsg('GPU unavailable. Trying CPU processing...');
+        blob=await removeBackground(file,{...config,device:'cpu'});
+      }
       setProgress(100);
       setResultUrl(URL.createObjectURL(blob));
       setStatusMsg("");

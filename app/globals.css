@@ -18,6 +18,9 @@ html {
   scroll-behavior: smooth;
 }
 
+:focus-visible { outline: 3px solid #673DE6; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   background: var(--apple-white);

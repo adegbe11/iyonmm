@@ -20,7 +20,7 @@ export default function CompressPdfClient() {
     try {
       const { PDFDocument } = await import("pdf-lib");
       const buf = await file.arrayBuffer();
-      const doc = await PDFDocument.load(buf, { ignoreEncryption: true });
+      const doc = await PDFDocument.load(buf);
 
       // Remove unused metadata to reduce size
       doc.setTitle("");
@@ -54,7 +54,7 @@ export default function CompressPdfClient() {
       ]}
       faqs={[
         { q: "Are my PDFs uploaded to a server?", a: "No. Compression runs entirely in your browser using pdf-lib. Nothing is uploaded." },
-        { q: "How much can I compress a PDF?", a: "Image-heavy PDFs typically see 40-80% reduction. Text PDFs may see 10-30%. Results vary by content." },
+        { q: "How much can I compress a PDF?", a: "This tool optimizes structure and removes metadata. It does not recompress images. Already optimized PDFs may not become smaller." },
         { q: "Will my PDF quality decrease?", a: "We remove metadata and optimize structure without touching visual content. Quality stays the same." },
         { q: "Is there a file size limit?", a: "No. Process files as large as your device memory allows." },
       ]}

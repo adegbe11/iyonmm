@@ -17,9 +17,11 @@ export default function OcrPdfClient() {
     setText("");
     setProgress(0);
 
+    let worker: Awaited<ReturnType<typeof import('tesseract.js')['createWorker']>> | undefined;
+    let destroyPdf: (()=>Promise<void>) | undefined;
     try {
       const Tesseract = await import("tesseract.js");
-      const worker = await Tesseract.createWorker("eng", 1, {
+      worker = await Tesseract.createWorker("eng", 1, {
         logger: (m: { progress: number }) => {
           if (m.progress) setProgress(Math.round(m.progress * 100));
         },
@@ -30,7 +32,8 @@ export default function OcrPdfClient() {
         const pdfjsLib = await import("pdfjs-dist");
         pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
         const buf = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+        const task=pdfjsLib.getDocument({data:buf});destroyPdf=()=>task.destroy();
+        const pdf = await task.promise;
         let allText = "";
         for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
           const page = await pdf.getPage(i);
@@ -42,6 +45,7 @@ export default function OcrPdfClient() {
           await page.render({ canvasContext: canvas.getContext("2d") as any, viewport: vp, canvas } as any).promise;
           const { data: { text: t } } = await worker.recognize(canvas);
           allText += `\n\n--- Page ${i} ---\n${t}`;
+          page.cleanup();canvas.width=0;canvas.height=0;
         }
         setText(allText.trim());
       } else {
@@ -49,11 +53,10 @@ export default function OcrPdfClient() {
         setText(t);
       }
 
-      await worker.terminate();
     } catch (e) {
       alert("OCR failed. Try a clearer image or PDF.");
       console.error(e);
-    }
+    } finally {await worker?.terminate();await destroyPdf?.();}
     setProcessing(false);
   }
 

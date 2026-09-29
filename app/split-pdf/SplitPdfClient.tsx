@@ -7,9 +7,10 @@ function parseRange(input: string, total: number): number[] {
   const pages: number[] = [];
   const parts = input.split(",").map((s) => s.trim());
   for (const part of parts) {
+    if (!/^\d+(?:\s*-\s*\d+)?$/.test(part)) continue;
     if (part.includes("-")) {
       const [a, b] = part.split("-").map(Number);
-      for (let i = a; i <= Math.min(b, total); i++) pages.push(i);
+      for (let i = Math.max(1,a); i <= Math.min(b, total); i++) pages.push(i);
     } else {
       const n = Number(part);
       if (n >= 1 && n <= total) pages.push(n);
@@ -45,6 +46,7 @@ export default function SplitPdfClient() {
       const src = await PDFDocument.load(await file.arrayBuffer());
       const total = src.getPageCount();
       const pages = mode === "all" ? Array.from({ length: total }, (_, i) => i + 1) : parseRange(range, total);
+      if(!pages.length)throw new Error('Select at least one valid page.');
 
       const out: { name: string; url: string }[] = [];
       if (mode === "all") {

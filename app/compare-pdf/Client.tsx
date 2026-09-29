@@ -2,19 +2,22 @@
 import { useState } from "react";
 import ToolShell from "@/components/ToolShell";
 import DropZone from "@/components/DropZone";
+import { diffLines } from "@/lib/text-diff";
 
 type Row = { type: "same" | "add" | "del"; text: string };
 
 async function extract(file: File): Promise<string[]> {
   const pdfjsLib = await import("pdfjs-dist");
   pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
-  const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+  const task = pdfjsLib.getDocument({ data: await file.arrayBuffer() });
+  const pdf = await task.promise;
   let text = "";
-  for (let i = 1; i <= pdf.numPages; i++) {
+  try {for (let i = 1; i <= pdf.numPages; i++) {
     const c = await (await pdf.getPage(i)).getTextContent();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     text += c.items.map((it: any) => it.str).join(" ") + "\n";
-  }
+  }} finally { await task.destroy(); }
+  if (!text.trim()) throw new Error('This PDF has no extractable text. Use OCR for scanned pages.');
   return text.split(/\n|(?<=\.)\s+/).map((l) => l.trim()).filter(Boolean);
 }
 
@@ -42,8 +45,8 @@ export default function Client() {
 
   async function run() {
     if (!a || !b) return; setBusy(true);
-    try { setRows(diff(await extract(a), await extract(b))); }
-    catch (e) { console.error(e); alert("Could not read one of the PDFs. Both must have real text."); }
+    try { setRows(diffLines(await extract(a), await extract(b))); }
+    catch (e) { console.error(e); alert(e instanceof Error ? e.message : "Could not read one of the PDFs. Both must have real text."); }
     setBusy(false);
   }
 

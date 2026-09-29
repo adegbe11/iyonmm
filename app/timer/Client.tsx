@@ -15,6 +15,7 @@ function beep() {
     o.connect(g); g.connect(ctx.destination); o.frequency.value = 880; o.type = "sine";
     g.gain.setValueAtTime(0.5, ctx.currentTime); o.start();
     g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2); o.stop(ctx.currentTime + 1.2);
+    o.onended = () => { void ctx.close(); };
   } catch { /* ignore */ }
 }
 
@@ -23,14 +24,15 @@ export default function Client() {
   const [secs, setSecs] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const [running, setRunning] = useState(false);
+  const [finished, setFinished] = useState(false);
   const endRef = useRef(0);
 
   useEffect(() => {
     if (!running) return;
     const id = setInterval(() => {
-      const left = Math.max(0, Math.round((endRef.current - Date.now()) / 1000));
+      const left = Math.max(0, Math.ceil((endRef.current - Date.now()) / 1000));
       setRemaining(left);
-      if (left <= 0) { setRunning(false); beep(); }
+      if (left <= 0) { setRunning(false); setFinished(true); beep(); }
     }, 250);
     return () => clearInterval(id);
   }, [running]);
@@ -39,12 +41,12 @@ export default function Client() {
     const total = remaining > 0 && running === false && remaining !== 0 ? remaining : mins * 60 + secs;
     if (total <= 0) return;
     endRef.current = Date.now() + total * 1000;
-    setRemaining(total); setRunning(true);
+    setRemaining(total); setFinished(false); setRunning(true);
   }
   function pause() { setRunning(false); }
-  function reset() { setRunning(false); setRemaining(0); }
+  function reset() { setRunning(false); setRemaining(0); setFinished(false); }
 
-  const show = running || remaining > 0 ? remaining : mins * 60 + secs;
+  const show = finished ? 0 : running || remaining > 0 ? remaining : mins * 60 + secs;
   const mm = String(Math.floor(show / 60)).padStart(2, "0");
   const ss = String(show % 60).padStart(2, "0");
 

@@ -21,18 +21,26 @@ export default function WordToPdfClient() {
       const { value: html } = await mammoth.convertToHtml({ arrayBuffer });
 
       const container = document.createElement("div");
-      container.innerHTML = html;
+      const template=document.createElement('template');template.innerHTML=html;
+      template.content.querySelectorAll('script,iframe,object,embed,link,style,base,video,audio,source').forEach(node=>node.remove());
+      template.content.querySelectorAll('*').forEach(node=>{
+        for(const attribute of Array.from(node.attributes)){
+          const name=attribute.name.toLowerCase();
+          if(name.startsWith('on')||['href','srcset','style','action','formaction'].includes(name))node.removeAttribute(attribute.name);
+          if(name==='src'&&!/^data:image\/(?:png|jpeg|gif|webp);base64,/i.test(attribute.value))node.removeAttribute(attribute.name);
+        }
+      });
+      container.appendChild(template.content);
       container.style.cssText = "width:760px;padding:48px;font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#000;background:#fff;position:fixed;left:-9999px;top:0;";
       document.body.appendChild(container);
 
       const pdf = new jsPDF({ unit: "pt", format: "a4" });
-      await pdf.html(container, {
+      try {await pdf.html(container, {
         margin: [40, 40, 40, 40],
         autoPaging: "text",
         width: 515,
         windowWidth: 760,
-      });
-      document.body.removeChild(container);
+      });} finally {container.remove();}
 
       const blob = pdf.output("blob");
       setResultUrl(URL.createObjectURL(blob));

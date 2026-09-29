@@ -7,6 +7,8 @@ const BASE = "https://www.iyonm.com";
 
 const staticPages = [
   { path: "", priority: 1.0 },
+  { path: "/pdf-to-json", priority: 0.9 },
+  { path: "/batch-document-renamer", priority: 0.9 },
   { path: "/compress-image", priority: 0.9 },
   { path: "/resize-image", priority: 0.9 },
   { path: "/remove-background", priority: 0.9 },

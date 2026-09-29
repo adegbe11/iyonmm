@@ -32,8 +32,14 @@ export default function ImageToPdfClient() {
         let image;
         if (file.type === "image/png") {
           image = await doc.embedPng(data);
-        } else {
+        } else if (file.type === 'image/jpeg') {
           image = await doc.embedJpg(data);
+        } else {
+          const bitmap = await createImageBitmap(file);
+          const canvas = document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;
+          const context=canvas.getContext('2d');if(!context)throw new Error('Cannot decode image');
+          context.drawImage(bitmap,0,0);bitmap.close();
+          image=await doc.embedPng(canvas.toDataURL('image/png'));canvas.width=0;canvas.height=0;
         }
         const page = doc.addPage([image.width, image.height]);
         page.drawImage(image, { x: 0, y: 0, width: image.width, height: image.height });
